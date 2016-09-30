@@ -26,7 +26,7 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-typedef _event
+typedef struct _event
 {
     uint8_t signal;
     uint8_t parameter;
@@ -34,7 +34,7 @@ typedef _event
 
 typedef struct _event_queue
 {
-	event_t *buffer;
+    event_t *buffer;
     event_t *head;
     event_t *tail;
     uint8_t  size;
@@ -46,17 +46,17 @@ typedef struct _event_queue
  ******************************************************************************/
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif /* __cplusplus */
 
-void EQ_Init(event_queue_t *eqHandle, event_t *eqPool, uint8_t eqSize);
-bool EQ_Push(event_queue_t *eqHandle, event_t *event);
-bool EQ_Pull(event_queue_t *eqHandle, event_t *event);
-bool EQ_IsFull(event_queue_t *eqHandle);
-bool EQ_IsEmpty(event_queue_t *eqHandle);
+void EvtQueue_Init(event_queue_t *evtQueueHandle, event_t *buffer, uint8_t size);
+bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event);
+bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event);
+bool EvtQueue_IsFull(event_queue_t *evtQueueHandle);
+bool EvtQueue_IsEmpty(event_queue_t *evtQueueHandle);
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 /******************************************************************************
  * EOF
  *****************************************************************************/

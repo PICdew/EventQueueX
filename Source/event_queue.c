@@ -14,67 +14,76 @@
  * limitations under the License.
  */
 
- /*******************************************************************************
+/*******************************************************************************
  * Includes
  ******************************************************************************/
 #include "event_queue.h"
+#include "port.h"
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
-void EQ_Init(event_queue_t *eqHandle, event_t *eqPool, uint8_t eqSize)
+void EvtQueue_Init(event_queue_t *evtQueueHandle, event_t *buffer, uint8_t size)
 {
-	eqHandle->buffer = eqPool;
-	eqHandle->head = eqPool;
-	eqHandle->tail = eqPool;
-	eqHandle->size = eqSize;
-	eqHandle->full = false;
+	evtQueueHandle->buffer = buffer;
+	evtQueueHandle->head = buffer;
+	evtQueueHandle->tail = buffer;
+	evtQueueHandle->size = size;
+	evtQueueHandle->full = false;
 }
 
-bool EQ_Push(event_queue_t *eqHandle, event_t *event)
+bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
 {
-	if (EQ_IsFull(eqHandle))
+    ENTER_CRITICAL_SECTION();
+	if (EvtQueue_IsFull(evtQueueHandle))
 	{
+        EXIT_CRITICAL_SECTION();
+
 		return false;
 	}
 
-	*eqHandle->tail = *event;
-	eqHandle->tail++;
+	*evtQueueHandle->tail = *event;
+	evtQueueHandle->tail++;
 
-	if (eqHandle->tail == (eqHandle->buffer + eqHandle->size))
+	if (evtQueueHandle->tail == (evtQueueHandle->buffer + evtQueueHandle->size))
 	{
-		eqHandle->tail = eqHandle->buffer;
+		evtQueueHandle->tail = evtQueueHandle->buffer;
 	}
+    EXIT_CRITICAL_SECTION();
 
 	return true;
 }
 
-bool EQ_Pull(event_queue_t *eqHandle, event_t *event)
+bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event)
 {
-	if (EQ_IsEmpty(eqHandle))
+    ENTER_CRITICAL_SECTION();
+	if (EvtQueue_IsEmpty(evtQueueHandle))
 	{
+        EXIT_CRITICAL_SECTION();
+
 		return false;
 	}
 
-	*event = *eqHandle->head;
-	eqHandle->head++;
+	*event = *evtQueueHandle->head;
+	evtQueueHandle->head++;
 
-	if (eqHandle->head == (eqHandle->buffer + eqHandle->size))
+	if (evtQueueHandle->head == (evtQueueHandle->buffer + evtQueueHandle->size))
 	{
-		eqHandle->head = eqHandle->buffer;
+		evtQueueHandle->head = evtQueueHandle->buffer;
 	}
+    EXIT_CRITICAL_SECTION();
 
 	return true;
 }
 
-bool EQ_IsFull(event_queue_t *eqHandle)
+bool EvtQueue_IsFull(event_queue_t *evtQueueHandle)
 {
-	return ((eqHandle->head == eqHandle->tail = eqPool) && (eqHandle->full));
+	return ((evtQueueHandle->head == evtQueueHandle->tail) && (evtQueueHandle->full));
 }
 
-bool EQ_IsEmpty(event_queue_t *eqHandle)
+bool EvtQueue_IsEmpty(event_queue_t *evtQueueHandle)
 {
-	return ((eqHandle->head == eqHandle->tail = eqPool) && (!eqHandle->full));
+	return ((evtQueueHandle->head == evtQueueHandle->tail) && (!evtQueueHandle->full));
 }
 
 /******************************************************************************

@@ -34,11 +34,11 @@ typedef struct _event
 
 typedef struct _event_queue
 {
-    event_t *buffer;
-    event_t *head;
-    event_t *tail;
-    uint8_t  size;
-    bool     full;
+    volatile event_t *buffer;
+    volatile event_t *head;
+    volatile event_t *tail;
+    volatile uint8_t  size;
+    volatile bool     full;
 } event_queue_t;
 
 /*******************************************************************************
@@ -49,6 +49,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 void EvtQueue_Init(event_queue_t *evtQueueHandle, event_t *buffer, uint8_t size);
+void EvtQueue_Deinit(event_queue_t *evtQueueHandle);
 bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event);
 bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event);
 bool EvtQueue_IsFull(event_queue_t *evtQueueHandle);

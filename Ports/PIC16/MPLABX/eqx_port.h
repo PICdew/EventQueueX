@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef __PORT_H__
-#define __PORT_H__
+#ifndef __EQX_PORT_H__
+#define __EQX_PORT_H__
 
 /*******************************************************************************
  * Definitions
@@ -33,4 +33,4 @@ void PORT_ExitCriticalSection(void);
  * EOF
  *****************************************************************************/
 
-#endif /* __PORT_H__ */
+#endif /* __EQX_PORT_H__ */

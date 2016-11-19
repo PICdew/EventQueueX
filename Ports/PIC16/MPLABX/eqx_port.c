@@ -13,20 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "fsl_device_registers.h"
-#include "port.h"
+#include <stdint.h>
+#include <xc.h>
+#include "eqx_port.h"
+
+/*******************************************************************************
+ * Variables
+ ******************************************************************************/
+ static volatile uint8_t criticalSectionNestCounter = 0;
+ static volatile uint8_t globalInterruptEnableBackup = 0;
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
 void PORT_EnterCriticalSection(void)
 {
-    __enable_irq();
+    if (0 == criticalSectionNestCounter)
+    {
+        /* Save origional interrupt enable bit. */
+        globalInterruptEnableBackup = INTCONbits.GIE;
+
+        /* Disable Interrupt. */
+        INTCONbits.GIE = 0;
+    }
+
+    /* Increase use count. */
+    criticalSectionNestCounter++;
 }
 
 void PORT_ExitCriticalSection(void)
 {
-    __disable_irq();
+    /* Decrease use count. */
+    criticalSectionNestCounter--;
+
+    if (0 == criticalSectionNestCounter)
+    {
+        /* Load origional interrupt enable bit. */
+        INTCONbits.GIE = globalInterruptEnableBackup;
+    }
 }
 
 /******************************************************************************

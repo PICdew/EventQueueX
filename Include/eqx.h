@@ -14,14 +14,21 @@
  *  limitations under the License.
  */
 
-#ifndef _SCHEDULER_H_
-#define _SCHEDULER_H_
+#ifndef _EQX_H_
+#define _EQX_H_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
 #include <stdint.h>
+#include <stdbool.h>
+#include "eqx_port.h"
 #include "event_queue.h"
+
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+typedef void (*EQX_Task)(event_t event);
 
 /*******************************************************************************
  * API
@@ -30,28 +37,19 @@
 extern "C" {
 #endif /* __cplusplus */
 
-/* Framework related APIs */
 void EQX_Init(void);
 void EQX_Run(void);
-
-#if (1 == EQX_USE_GO_TO_SLEEP)
-    void EQX_GoToSleep(void);
-#endif
-
-/* Task Control APIs */
-bool EQX_CreateTask(void (*TaskName)(uint8_t signal, uint8_t parameter),
-                    uint8_t prio, event_t *buffer, uint8_t size);
+bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                    uint8_t size, uint8_t signal, uint8_t parameter);
 bool EQX_DeleteTask(uint8_t prio);
-
-/* Event handle APIs */
 bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter);
-//void EQX_PostEvent(uint8_t prio, uint8_t signal);
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
+
+#endif /* _EQX_H_ */
+
 /******************************************************************************
  * EOF
  *****************************************************************************/
-
-#endif /* _SCHEDULER_H_ */

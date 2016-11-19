@@ -19,27 +19,27 @@
  ******************************************************************************/
 #include <stdio.h>
 #include "event_queue.h"
-#include "port.h"
+#include "eqx_port.h"
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
 void EvtQueue_Init(event_queue_t *evtQueueHandle, event_t *buffer, uint8_t size)
 {
-	evtQueueHandle->buffer = buffer;
-	evtQueueHandle->head = buffer;
-	evtQueueHandle->tail = buffer;
-	evtQueueHandle->size = size;
-	evtQueueHandle->full = false;
+    evtQueueHandle->buffer = buffer;
+    evtQueueHandle->head = buffer;
+    evtQueueHandle->tail = buffer;
+    evtQueueHandle->size = size;
+    evtQueueHandle->full = false;
 }
 
 void EvtQueue_Deinit(event_queue_t *evtQueueHandle)
 {
     evtQueueHandle->buffer = NULL;
-	evtQueueHandle->head = NULL;
-	evtQueueHandle->tail = NULL;
-	evtQueueHandle->size = 0;
-	evtQueueHandle->full = false;
+    evtQueueHandle->head = NULL;
+    evtQueueHandle->tail = NULL;
+    evtQueueHandle->size = 0;
+    evtQueueHandle->full = false;
 }
 
 bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
@@ -47,7 +47,7 @@ bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
     bool result = false;
 
     ENTER_CRITICAL_SECTION();
-	if (!EvtQueue_IsFull(evtQueueHandle))
+    if (!EvtQueue_IsFull(evtQueueHandle))
     {
         *evtQueueHandle->tail = *event;
         evtQueueHandle->tail++;
@@ -56,11 +56,11 @@ bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
             evtQueueHandle->tail = evtQueueHandle->buffer;
         }
 
-		result = true;
+        result = true;
     }
     EXIT_CRITICAL_SECTION();
 
-	return result;
+    return result;
 }
 
 bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event)
@@ -68,7 +68,7 @@ bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event)
     bool result = false;
 
     ENTER_CRITICAL_SECTION();
-	if (!EvtQueue_IsEmpty(evtQueueHandle))
+    if (!EvtQueue_IsEmpty(evtQueueHandle))
     {
         *event = *evtQueueHandle->head;
         evtQueueHandle->head++;
@@ -82,7 +82,7 @@ bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event)
     }
     EXIT_CRITICAL_SECTION();
 
-	return result;
+    return result;
 }
 
 bool EvtQueue_IsFull(event_queue_t *evtQueueHandle)
@@ -93,7 +93,7 @@ bool EvtQueue_IsFull(event_queue_t *evtQueueHandle)
     result = ((evtQueueHandle->head == evtQueueHandle->tail) && (evtQueueHandle->full));
     EXIT_CRITICAL_SECTION();
 
-	return result;
+    return result;
 }
 
 bool EvtQueue_IsEmpty(event_queue_t *evtQueueHandle)
@@ -104,7 +104,7 @@ bool EvtQueue_IsEmpty(event_queue_t *evtQueueHandle)
     result = ((evtQueueHandle->head == evtQueueHandle->tail) && (!evtQueueHandle->full));
     EXIT_CRITICAL_SECTION();
 
-	return result;
+    return result;
 }
 
 /******************************************************************************

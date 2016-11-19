@@ -19,7 +19,8 @@
  ******************************************************************************/
 #include <xc.h>
 #include <stdint.h>
-#include "scheduler.h"
+#include "mcc_generated_files/mcc.h"
+#include "eqx.h"
 
 /*******************************************************************************
  * Variables
@@ -29,20 +30,47 @@ static event_t blinkEvtQueue[10];
 /*******************************************************************************
  * Code
  ******************************************************************************/
-void blinking(uint8_t signal, uint8_t parameter)
+void blinking(event_t event)
 {
+    if (0U != event.signal)
+    {
+        IO_RA5_Toggle();
+    }
+}
+
+void TMR0_IrqHandler(void)
+{
+    IO_RA2_Toggle();
+    EQX_PostEvent(0, 1U, 0);
+}
+
+void EQX_Start(void)
+{
+    TMR0_Initialize();
+    TMR0_SetInterruptHandler(TMR0_IrqHandler);
+
+    // Enable the Peripheral Interrupts
+    INTERRUPT_PeripheralInterruptEnable();
+    // Enable the Global Interrupts
+    INTERRUPT_GlobalInterruptEnable();
 }
 
 void main(void)
 {
-	EQX_Init();
-	EQX_CreateTask(blinking, 0, blinkEvtQueue, sizeof(blinkEvtQueue)/sizeof(blinkEvtQueue[0]));
-    EQX_CreateTask(blinking, 1, blinkEvtQueue, sizeof(blinkEvtQueue)/sizeof(blinkEvtQueue[0]));
-    EQX_PostEvent(0, 0, 0);
-    EQX_DeleteTask(1);
+    SYSTEM_Initialize();
 
-	/* Give flow control to scheduler. */
-	EQX_Run();
+    IO_RA1_SetLow();
+    IO_RA2_SetLow();
+    IO_RA5_SetLow();
+    IO_RC5_SetLow();
+
+    EQX_Init();
+    EQX_CreateTask(blinking, 0U, blinkEvtQueue,
+                   sizeof(blinkEvtQueue)/sizeof(blinkEvtQueue[0]),
+                   0U, 0U);
+
+    /* Give flow control to scheduler. */
+    EQX_Run();
 }
 
 /******************************************************************************

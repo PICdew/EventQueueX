@@ -30,6 +30,7 @@
 typedef struct _task_handle
 {
     EQX_Task task;
+    uint8_t priorityMask;
     event_queue_t evtQueueHandle;
 } task_handle_t;
 
@@ -45,6 +46,7 @@ extern void EQX_Start(void);
  * Variables
  ******************************************************************************/
 static task_handle_t taskHandle[EQX_MAX_TASKS];
+static uint8_t EQX_readySet = 0U;
 
 /*******************************************************************************
  * Code
@@ -57,6 +59,7 @@ void EQX_Init(void)
     for (index = 0; index < EQX_MAX_TASKS; index++)
     {
         taskHandle[index].task = NULL;
+        taskHandle[index].priorityMask = 0U;
         EvtQueue_Deinit(&taskHandle[index].evtQueueHandle);
     }
     EXIT_CRITICAL_SECTION();
@@ -71,6 +74,7 @@ bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
     {
         ENTER_CRITICAL_SECTION();
         taskHandle[prio].task = task;
+        taskHandle[prio].priorityMask = 1U << prio;
         EvtQueue_Init(&taskHandle[prio].evtQueueHandle, buffer, size);
         result = EQX_PostEvent(prio, signal, parameter);
         EXIT_CRITICAL_SECTION();
@@ -98,21 +102,63 @@ bool EQX_DeleteTask(uint8_t prio)
 
 void EQX_Run(void)
 {
-    uint8_t index;
+    static uint8_t const log2Lkup[] = {
+        0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4,
+        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+        6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+        6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+    };
     event_t event;
+    uint8_t prio;
 
     EQX_Start();
 
     for (;;)
     {
-        for (index = 0; index < EQX_MAX_TASKS; index++)
+        ENTER_CRITICAL_SECTION();
+        while (0U != (prio = log2Lkup[EQX_readySet]))
         {
-            if (EvtQueue_Pull(&taskHandle[index].evtQueueHandle, &event))
+            prio -= 1U;
+
+            for (;;)
             {
-                /* Run the task. */
-                (*taskHandle[index].task)(event);
+                if (EvtQueue_IsEmpty(&taskHandle[prio].evtQueueHandle))
+                {
+                    EQX_readySet &= ~taskHandle[prio].priorityMask;
+                    break;
+                }
+                else
+                {
+                    if (EvtQueue_Pull(&taskHandle[prio].evtQueueHandle, &event) &&
+                        (NULL != taskHandle[prio].task))
+                    {
+                        EXIT_CRITICAL_SECTION();
+
+                        /* Run the task. */
+                        (*taskHandle[prio].task)(event);
+
+                        ENTER_CRITICAL_SECTION();
+                    }
+                }
             }
         }
+        EXIT_CRITICAL_SECTION();
+
+        #if defined(EQX_USE_GO_TO_SLEEP) &&(1U == EQX_USE_GO_TO_SLEEP)
+            EQX_GoToSleep();
+        #endif
     }
 }
 
@@ -123,9 +169,15 @@ bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter)
 
     if (NULL != taskHandle[prio].task)
     {
+        ENTER_CRITICAL_SECTION();
+        if (EvtQueue_IsEmpty(&taskHandle[prio].evtQueueHandle))
+        {
+            EQX_readySet |= taskHandle[prio].priorityMask;
+        }
         event.signal = signal;
         event.parameter = parameter;
         result = EvtQueue_Push(&taskHandle[prio].evtQueueHandle, &event);
+        EXIT_CRITICAL_SECTION();
     }
 
     return result;

@@ -25,12 +25,22 @@
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-static event_t blinkEvtQueue[10];
+static event_t blink1EvtQueue[10];
+static event_t blink2EvtQueue[10];
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
-void blinking(event_t event)
+void blinking1(event_t event)
+{
+    if (0U != event.signal)
+    {
+        IO_RA2_Toggle();
+        EQX_PostEvent(1U, 1U, 0);
+    }
+}
+
+void blinking2(event_t event)
 {
     if (0U != event.signal)
     {
@@ -40,7 +50,6 @@ void blinking(event_t event)
 
 void TMR0_IrqHandler(void)
 {
-    IO_RA2_Toggle();
     EQX_PostEvent(0, 1U, 0);
 }
 
@@ -65,8 +74,12 @@ void main(void)
     IO_RC5_SetLow();
 
     EQX_Init();
-    EQX_CreateTask(blinking, 0U, blinkEvtQueue,
-                   sizeof(blinkEvtQueue)/sizeof(blinkEvtQueue[0]),
+    EQX_CreateTask(blinking1, 0U, blink1EvtQueue,
+                   sizeof(blink1EvtQueue)/sizeof(blink1EvtQueue[0]),
+                   0U, 0U);
+
+    EQX_CreateTask(blinking2, 1U, blink2EvtQueue,
+                   sizeof(blink2EvtQueue)/sizeof(blink2EvtQueue[0]),
                    0U, 0U);
 
     /* Give flow control to scheduler. */

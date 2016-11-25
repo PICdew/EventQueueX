@@ -154,11 +154,11 @@ void EQX_Run(void)
                 }
             }
         }
-        EXIT_CRITICAL_SECTION();
 
         #if defined(EQX_USE_GO_TO_SLEEP) &&(1U == EQX_USE_GO_TO_SLEEP)
             EQX_GoToSleep();
         #endif
+        EXIT_CRITICAL_SECTION();
     }
 }
 

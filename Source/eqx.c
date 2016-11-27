@@ -25,6 +25,9 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+#if (EQX_MAX_TASKS < 1) || (8 < EQX_MAX_TASKS)
+    #error "EQX_MAX_TASKS not defined or out of range. Valid range is 1..8"
+#endif
 #define NULL (0U)
 
 typedef struct _task_handle

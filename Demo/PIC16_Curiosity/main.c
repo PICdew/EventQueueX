@@ -64,6 +64,10 @@ void EQX_Start(void)
     INTERRUPT_GlobalInterruptEnable();
 }
 
+void EQX_GoToSleep(void)
+{
+}
+
 void main(void)
 {
     SYSTEM_Initialize();

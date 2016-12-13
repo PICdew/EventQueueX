@@ -58,8 +58,9 @@ bool EvtQueue_IsEmpty(event_queue_t *evtQueueHandle);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
+
+#endif /* __EVENT_QUEUE_H__ */
+
 /******************************************************************************
  * EOF
  *****************************************************************************/
-
-#endif /* __EVENT_QUEUE_H__ */

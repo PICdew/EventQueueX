@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <stdint.h>
 #include <xc.h>
 #include "eqx_port.h"
@@ -20,33 +24,33 @@
 /*******************************************************************************
  * Variables
  ******************************************************************************/
- static volatile uint8_t criticalSectionNestCounter = 0;
- static volatile uint8_t globalInterruptEnableBackup = 0;
+ static volatile uint8_t criticalSectionNestCounter = 0U;
+ static volatile uint8_t globalInterruptEnableBackup = 0U;
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
 void PORT_EnterCriticalSection(void)
 {
-    if (0 == criticalSectionNestCounter)
+    if (0U == criticalSectionNestCounter)
     {
         /* Save origional interrupt enable bit. */
         globalInterruptEnableBackup = INTCONbits.GIE;
 
         /* Disable Interrupt. */
-        INTCONbits.GIE = 0;
+        INTCONbits.GIE = 0U;
     }
 
-    /* Increase use count. */
+    /* Increase nest count. */
     criticalSectionNestCounter++;
 }
 
 void PORT_ExitCriticalSection(void)
 {
-    /* Decrease use count. */
+    /* Decrease nest count. */
     criticalSectionNestCounter--;
 
-    if (0 == criticalSectionNestCounter)
+    if (0U == criticalSectionNestCounter)
     {
         /* Load origional interrupt enable bit. */
         INTCONbits.GIE = globalInterruptEnableBackup;

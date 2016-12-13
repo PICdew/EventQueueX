@@ -38,7 +38,7 @@ void EvtQueue_Deinit(event_queue_t *evtQueueHandle)
     evtQueueHandle->buffer = NULL;
     evtQueueHandle->head = NULL;
     evtQueueHandle->tail = NULL;
-    evtQueueHandle->size = 0;
+    evtQueueHandle->size = 0U;
     evtQueueHandle->full = false;
 }
 

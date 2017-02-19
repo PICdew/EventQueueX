@@ -17,25 +17,18 @@
 #ifndef __EQX_PORT_H__
 #define __EQX_PORT_H__
 
+#include <xc.h>
+
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define ENTER_CRITICAL_SECTION()    PORT_EnterCriticalSection()
-#define EXIT_CRITICAL_SECTION()     PORT_ExitCriticalSection()
-
-/*******************************************************************************
- * API
- ******************************************************************************/
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-void PORT_EnterCriticalSection(void);
-void PORT_ExitCriticalSection(void);
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+#define ENTER_CRITICAL_SECTION(stat)    do { \
+                                            stat = INTCONbits.GIE; \
+                                            INTCONbits.GIE = 0U; \
+                                        } while(0U)
+#define EXIT_CRITICAL_SECTION(stat)     do { \
+                                            INTCONbits.GIE = stat; \
+                                        } while(0)
 
 #endif /* __EQX_PORT_H__ */
 

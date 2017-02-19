@@ -45,8 +45,9 @@ void EvtQueue_Deinit(event_queue_t *evtQueueHandle)
 bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
 {
     bool result = false;
+    uint8_t state;
 
-    ENTER_CRITICAL_SECTION();
+    ENTER_CRITICAL_SECTION(state);
     if (!EvtQueue_IsFull(evtQueueHandle))
     {
         *evtQueueHandle->tail = *event;
@@ -58,7 +59,7 @@ bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
 
         result = true;
     }
-    EXIT_CRITICAL_SECTION();
+    EXIT_CRITICAL_SECTION(state);
 
     return result;
 }
@@ -66,8 +67,9 @@ bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
 bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event)
 {
     bool result = false;
+    uint8_t state;
 
-    ENTER_CRITICAL_SECTION();
+    ENTER_CRITICAL_SECTION(state);
     if (!EvtQueue_IsEmpty(evtQueueHandle))
     {
         *event = *evtQueueHandle->head;
@@ -80,7 +82,7 @@ bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event)
 
         result = true;
     }
-    EXIT_CRITICAL_SECTION();
+    EXIT_CRITICAL_SECTION(state);
 
     return result;
 }
@@ -88,10 +90,11 @@ bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event)
 bool EvtQueue_IsFull(event_queue_t *evtQueueHandle)
 {
     bool result;
+    uint8_t state;
 
-    ENTER_CRITICAL_SECTION();
+    ENTER_CRITICAL_SECTION(state);
     result = ((evtQueueHandle->head == evtQueueHandle->tail) && (evtQueueHandle->full));
-    EXIT_CRITICAL_SECTION();
+    EXIT_CRITICAL_SECTION(state);
 
     return result;
 }
@@ -99,10 +102,11 @@ bool EvtQueue_IsFull(event_queue_t *evtQueueHandle)
 bool EvtQueue_IsEmpty(event_queue_t *evtQueueHandle)
 {
     bool result;
+    uint8_t state;
 
-    ENTER_CRITICAL_SECTION();
+    ENTER_CRITICAL_SECTION(state);
     result = ((evtQueueHandle->head == evtQueueHandle->tail) && (!evtQueueHandle->full));
-    EXIT_CRITICAL_SECTION();
+    EXIT_CRITICAL_SECTION(state);
 
     return result;
 }

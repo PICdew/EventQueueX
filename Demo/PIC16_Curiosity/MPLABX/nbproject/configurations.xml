@@ -27,9 +27,8 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="EQX" projectFiles="true">
-        <itemPath>../../../Source/event_queue.c</itemPath>
         <itemPath>../../../Source/eqx.c</itemPath>
-        <itemPath>../../../Ports/PIC16/MPLABX/eqx_port.c</itemPath>
+        <itemPath>../../../Source/event_queue.c</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -64,7 +63,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PKOBSKDEPlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>1.38</languageToolchainVersion>
+        <languageToolchainVersion>1.40</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -99,6 +98,7 @@
                   value="../../../Include;../../../Ports/PIC16/MPLABX;..\;./"/>
         <property key="favor-optimization-for" value="-speed,+space"/>
         <property key="identifier-length" value="255"/>
+        <property key="local-generation" value="false"/>
         <property key="operation-mode" value="free"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
         <property key="optimization-assembler" value="true"/>
@@ -158,6 +158,7 @@
         <property key="opt-xc8-linker-link_startup" value="false"/>
         <property key="opt-xc8-linker-serial" value=""/>
         <property key="program-the-device-with-default-config-words" value="true"/>
+        <appendMe value="--MSGDISABLE=520:off"/>
       </HI-TECH-LINK>
       <PKOBSKDEPlatformTool>
         <property key="AutoSelectMemRanges" value="auto"/>

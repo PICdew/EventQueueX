@@ -26,7 +26,7 @@
  * Definitions
  ******************************************************************************/
 #if (EQX_MAX_TASKS < 1U) || (8U < EQX_MAX_TASKS)
-    #error "EQX_MAX_TASKS not defined or out of range. Valid range is 1..8"
+#error "EQX_MAX_TASKS not defined or out of range. Valid range is 1..8"
 #endif
 #define NULL (0U)
 
@@ -41,15 +41,15 @@ typedef struct _task_handle
  * Prototypes
  ******************************************************************************/
 extern void EQX_Start(void);
-#if defined(EQX_USE_GO_TO_SLEEP) &&(1U == EQX_USE_GO_TO_SLEEP)
-    void EQX_GoToSleep(void);
+#if defined(EQX_USE_GO_TO_SLEEP) && (1U == EQX_USE_GO_TO_SLEEP)
+extern void EQX_GoToSleep(void);
 #endif
 
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-static task_handle_t taskHandle[EQX_MAX_TASKS];
-static uint8_t EQX_readySet = 0U;
+static task_handle_t volatile taskHandle[EQX_MAX_TASKS];
+static uint8_t volatile EQX_readySet = 0U;
 
 /*******************************************************************************
  * Code
@@ -109,22 +109,10 @@ bool EQX_DeleteTask(uint8_t prio)
 void EQX_Run(void)
 {
     static uint8_t const log2Lkup[] = {
-        0U, 1U, 2U, 2U, 3U, 3U, 3U, 3U, 4U, 4U, 4U, 4U, 4U, 4U, 4U, 4U,
-        5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U, 5U,
-        6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U,
-        6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U, 6U,
-        7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U,
-        7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U,
-        7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U,
-        7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U, 7U,
-        8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U,
-        8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U,
-        8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U,
-        8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U,
-        8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U,
-        8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U,
-        8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U,
-        8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U, 8U,
+        0U, 1U, 2U, 2U,
+        3U, 3U, 3U, 3U,
+        4U, 4U, 4U, 4U,
+        4U, 4U, 4U, 4U,
     };
     event_t event;
     uint8_t prio;
@@ -135,8 +123,17 @@ void EQX_Run(void)
     ENTER_CRITICAL_SECTION(state);
     for (;;)
     {
-        if (0U != (prio = log2Lkup[EQX_readySet]))
+        if (EQX_readySet != 0U)
         {
+            if ((EQX_readySet & 0xF0U) != 0U)
+            {
+                prio = QF_log2Lkup[EQX_readySet >> 4U] + 4U;
+            }
+            else
+            {
+                prio = QF_log2Lkup[EQX_readySet];
+            }
+
             prio -= 1U;
 
             for (;;)
@@ -164,9 +161,9 @@ void EQX_Run(void)
         else
         {
             EXIT_CRITICAL_SECTION(state);
-            #if defined(EQX_USE_GO_TO_SLEEP) &&(1U == EQX_USE_GO_TO_SLEEP)
-                EQX_GoToSleep();
-            #endif
+#if defined(EQX_USE_GO_TO_SLEEP) && (1U == EQX_USE_GO_TO_SLEEP)
+            EQX_GoToSleep();
+#endif
             ENTER_CRITICAL_SECTION(state);
         }
     }
@@ -180,7 +177,7 @@ bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter)
 
     ENTER_CRITICAL_SECTION(state);
     if (NULL != taskHandle[prio].task)
-    {    
+    {
         if (EvtQueue_IsEmpty(&taskHandle[prio].evtQueueHandle))
         {
             EQX_readySet |= taskHandle[prio].priorityMask;

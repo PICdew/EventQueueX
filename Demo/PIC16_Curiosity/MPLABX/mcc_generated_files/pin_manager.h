@@ -13,7 +13,7 @@
   @Description:
     This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15
         Device            :  PIC16F1619
         Version           :  1.01
     The generated drivers are tested against the following:
@@ -40,7 +40,9 @@
     CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
     SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+
 */
+
 
 #ifndef PIN_MANAGER_H
 #define PIN_MANAGER_H
@@ -155,8 +157,9 @@ void PIN_MANAGER_Initialize (void);
  */
 void PIN_MANAGER_IOC(void);
 
-#endif // PIN_MANAGER_H
 
+
+#endif // PIN_MANAGER_H
 /**
  End of File
 */

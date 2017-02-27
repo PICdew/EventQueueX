@@ -13,7 +13,7 @@
   @Description
     This header file provides APIs for TMR0.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15
         Device            :  PIC16F1619
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -54,7 +54,9 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus  // Provide C++ Compatibility
-extern "C" {
+
+    extern "C" {
+
 #endif
 
 /**
@@ -302,7 +304,6 @@ void TMR0_DefaultInterruptHandler(void);
 #endif
 
 #endif // _TMR0_H
-
 /**
  End of File
 */

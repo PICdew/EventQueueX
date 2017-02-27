@@ -15,7 +15,7 @@
     For individual peripheral handlers please see the peripheral driver for
     all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15
         Device            :  PIC16F1619
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -47,6 +47,7 @@
 
 #ifndef INTERRUPT_MANAGER_H
 #define INTERRUPT_MANAGER_H
+
 
 /**
  * @Param
@@ -107,6 +108,7 @@
     INTERRUPT_InterruptManager();
  */
 void interrupt INTERRUPT_InterruptManager(void);
+
 
 #endif  // INTERRUPT_MANAGER_H
 /**

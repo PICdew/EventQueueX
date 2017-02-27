@@ -75,15 +75,15 @@ bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
     bool result = false;
     uint8_t state;
 
+    ENTER_CRITICAL_SECTION(state);
     if (NULL == taskHandle[prio].task)
     {
-        ENTER_CRITICAL_SECTION(state);
         taskHandle[prio].task = task;
         taskHandle[prio].priorityMask = 1U << prio;
         EvtQueue_Init(&taskHandle[prio].evtQueueHandle, buffer, size);
         result = EQX_PostEvent(prio, signal, parameter);
-        EXIT_CRITICAL_SECTION(state);
     }
+    EXIT_CRITICAL_SECTION(state);
 
     return result;
 }
@@ -93,15 +93,15 @@ bool EQX_DeleteTask(uint8_t prio)
     bool result = false;
     uint8_t state;
 
+    ENTER_CRITICAL_SECTION(state);
     if (NULL != taskHandle[prio].task)
     {
-        ENTER_CRITICAL_SECTION(state);
         taskHandle[prio].task = NULL;
         EvtQueue_Deinit(&taskHandle[prio].evtQueueHandle);
-        EXIT_CRITICAL_SECTION(state);
 
         result = true;
     }
+    EXIT_CRITICAL_SECTION(state);
 
     return result;
 }
@@ -178,9 +178,9 @@ bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter)
     event_t event;
     uint8_t state;
 
+    ENTER_CRITICAL_SECTION(state);
     if (NULL != taskHandle[prio].task)
-    {
-        ENTER_CRITICAL_SECTION(state);
+    {    
         if (EvtQueue_IsEmpty(&taskHandle[prio].evtQueueHandle))
         {
             EQX_readySet |= taskHandle[prio].priorityMask;
@@ -188,8 +188,8 @@ bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter)
         event.signal = signal;
         event.parameter = parameter;
         result = EvtQueue_Push(&taskHandle[prio].evtQueueHandle, &event);
-        EXIT_CRITICAL_SECTION(state);
     }
+    EXIT_CRITICAL_SECTION(state);
 
     return result;
 }

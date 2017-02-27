@@ -48,7 +48,7 @@ extern void EQX_GoToSleep(void);
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-static task_handle_t volatile taskHandle[EQX_MAX_TASKS];
+static task_handle_t taskHandle[EQX_MAX_TASKS];
 static uint8_t volatile EQX_readySet = 0U;
 
 /*******************************************************************************
@@ -127,11 +127,11 @@ void EQX_Run(void)
         {
             if ((EQX_readySet & 0xF0U) != 0U)
             {
-                prio = QF_log2Lkup[EQX_readySet >> 4U] + 4U;
+                prio = log2Lkup[EQX_readySet >> 4U] + 4U;
             }
             else
             {
-                prio = QF_log2Lkup[EQX_readySet];
+                prio = log2Lkup[EQX_readySet];
             }
 
             prio -= 1U;

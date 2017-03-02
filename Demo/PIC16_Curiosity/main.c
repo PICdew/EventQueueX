@@ -21,6 +21,7 @@
 #include <stdint.h>
 #include "mcc_generated_files/mcc.h"
 #include "eqx.h"
+#include "pic16_itc.h"
 
 /*******************************************************************************
  * Variables
@@ -56,12 +57,14 @@ void TMR0_IrqHandler(void)
 void EQX_Start(void)
 {
     TMR0_Initialize();
+    ITC_ClearPendingIrq(TMR0_IRQn);
+    ITC_EnableIrq(TMR0_IRQn);
     TMR0_SetInterruptHandler(TMR0_IrqHandler);
 
     // Enable the Peripheral Interrupts
-    INTERRUPT_PeripheralInterruptEnable();
+    ITC_EnablePeripheralIrq();
     // Enable the Global Interrupts
-    INTERRUPT_GlobalInterruptEnable();
+    ITC_EnableGlobalIrq();
 }
 
 void EQX_GoToSleep(void)

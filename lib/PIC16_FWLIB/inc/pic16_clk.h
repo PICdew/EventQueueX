@@ -25,41 +25,48 @@ typedef enum _clk_sys_clk_src {
 } clk_sys_clk_src_t;
 
 typedef enum _clk_int_osc_freq {
-    CLK_IntOscFreq_LF_31000Hz = 0x0U,
-    CLK_IntOscFreq_MF_31250Hz = 0x2U,
-    CLK_IntOscFreq_HF_31250Hz = 0x3U,
-    CLK_IntOscFreq_MF_62500Hz = 0x4U,
-    CLK_IntOscFreq_MF_125000Hz = 0x5U,
-    CLK_IntOscFreq_MF_250000Hz = 0x6U,
-    CLK_IntOscFreq_MF_500000Hz = 0x7U,
-    CLK_IntOscFreq_HF_125000Hz = 0x8U,
-    CLK_IntOscFreq_HF_250000Hz = 0x9U,
-    CLK_IntOscFreq_HF_500000Hz = 0xAU,
-    CLK_IntOscFreq_HF_1000000Hz = 0xBU,
-    CLK_IntOscFreq_HF_2000000Hz = 0xCU,
-    CLK_IntOscFreq_HF_4000000Hz = 0xDU,
-    CLK_IntOscFreq_HF_8000000Hz = 0xEU,
-    CLK_IntOscFreq_HF_16000000Hz = 0xFU,
+    CLK_IntOscFreq_Lf_31000Hz = 0x0U,
+    CLK_IntOscFreq_Mf_31250Hz = 0x2U,
+    CLK_IntOscFreq_Hf_31250Hz = 0x3U,
+    CLK_IntOscFreq_Mf_62500Hz = 0x4U,
+    CLK_IntOscFreq_Mf_125000Hz = 0x5U,
+    CLK_IntOscFreq_Mf_250000Hz = 0x6U,
+    CLK_IntOscFreq_Mf_500000Hz = 0x7U,
+    CLK_IntOscFreq_Hf_125000Hz = 0x8U,
+    CLK_IntOscFreq_Hf_250000Hz = 0x9U,
+    CLK_IntOscFreq_Hf_500000Hz = 0xAU,
+    CLK_IntOscFreq_Hf_1000000Hz = 0xBU,
+    CLK_IntOscFreq_Hf_2000000Hz = 0xCU,
+    CLK_IntOscFreq_Hf_4000000Hz = 0xDU,
+    CLK_IntOscFreq_Hf_8000000Hz = 0xEU,
+    CLK_IntOscFreq_Hf_16000000Hz = 0xFU,
 } clk_int_osc_freq_t;
 
 typedef enum _clk_status {
-    CLK_STATUS_HFIntOscStable = 0x1U,
-    CLK_STATUS_LFIntOscReady = 0x2U,
-    CLK_STATUS_MFIntOscReady = 0x4U,
-    CLK_STATUS_HFIntOscLocked = 0x8U,
-    CLK_STATUS_HFIntOscReady = 0x10U,
+    CLK_STATUS_HfIntOscStable = 0x1U,
+    CLK_STATUS_LfIntOscReady = 0x2U,
+    CLK_STATUS_MfIntOscReady = 0x4U,
+    CLK_STATUS_HfIntOscLocked = 0x8U,
+    CLK_STATUS_HfIntOscReady = 0x10U,
     CLK_STATUS_MainOscReady = 0x20U,
     CLK_STATUS_PllReady = 0x40U,
 } clk_status_t;
 
 typedef enum _clk_name {
-    CLK_NAME_
+    CLK_NAME_SystemClk,
+    CLK_NAME_PrimaryOscClk,
+    CLK_NAME_HfIntOscClk,
+    CLK_NAME_MfIntOscClk,
+    CLK_NAME_LfIntOscClk,
+    CLK_NAME_FrcClk,
+    CLK_NAME_ExtOscClk,
 } clk_name_t;
 
 void CLK_SetSysClkSrc(clk_sys_clk_src_t source);
+void CLK_SetIntOscFreq(clk_int_osc_freq_t frequency);
+void CLK_setExtOscFreq(uint32_t frequency);
 void CLK_EnablePll(void);
 void CLK_DisablePll(void);
-void CLK_SetIntOscFreq(clk_int_osc_freq_t frequency);
 uint8_t CLK_GetStatus(void);
 uint32_t CLK_GetFreq(clk_name_t name);
 void CLK_SetIntOscTurningVal(uint8_t turning);

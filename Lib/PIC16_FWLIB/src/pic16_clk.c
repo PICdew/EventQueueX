@@ -128,7 +128,15 @@ static uint32_t CLK_GetIntOscFreq(void)
 
 void CLK_SetSysClkSrc(clk_sys_clk_src_t source)
 {
+    uint8_t i;
+
     OSCCON = (OSCCON & (~0x03U)) | source;
+
+    /* Add Delay to target clock source stable. */
+    for (i = 0U; i < 20U; i++)
+    {
+        asm(“NOP”);
+    }
 }
 
 void CLK_EnablePll(void)

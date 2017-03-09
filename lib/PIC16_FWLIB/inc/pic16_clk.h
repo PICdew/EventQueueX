@@ -71,4 +71,4 @@ uint8_t CLK_GetStatus(void);
 uint32_t CLK_GetFreq(clk_name_t name);
 void CLK_SetIntOscTurningVal(uint8_t turning);
 
-#endif /* _PIC16_ITC_H_ */
+#endif /* _PIC16_CLK_H_ */

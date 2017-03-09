@@ -18,9 +18,8 @@
 #define _PIC16_PORTA_H_
 
 #include <stdint.h>
-#include <stdbool.h>
 
-typdef enum _porta_pin {
+typedef enum _porta_pin {
     PORTA_Pin_0 = 0x0U,
     PORTA_Pin_1 = 0x1U,
     PORTA_Pin_2 = 0x2U,
@@ -62,13 +61,13 @@ typedef enum _porta_input_level {
 } porta_input_level_t;
 
 typedef struct _porta_pin_config {
-    uint8_t pinVal,
-    porta_direction_t direction,
-    porta_analog_sel_t analogSel,
-    porta_pull_up_t pullUp,
-    porta_open_drain_t openDrain,
-    porta_slaw_rate_t slawRate,
-    porta_input_level_t inputLevel,
+    uint8_t pinVal;
+    porta_direction_t direction;
+    porta_analog_sel_t analogSel;
+    porta_pull_up_t pullUp;
+    porta_open_drain_t openDrain;
+    porta_slaw_rate_t slawRate;
+    porta_input_level_t inputLevel;
 } porta_pin_config_t;
 
 void PORTA_Deinit(void);
@@ -76,9 +75,9 @@ void PORTA_Init(porta_pin_t pin, const porta_pin_config_t *config);
 void PORTA_Write(uint8_t portVal);
 uint8_t PORTA_Read(void);
 void PORTA_WritePin(porta_pin_t pin, uint8_t pinVal);
-void PORTA_SetPin(porta_pin_t pin, uint8_t pinVal);
-void PORTA_ClearPin(porta_pin_t pin, uint8_t pinVal);
-void PORTA_TogglePin(porta_pin_t pin, uint8_t pinVal);
+void PORTA_SetPin(porta_pin_t pin);
+void PORTA_ClearPin(porta_pin_t pin);
+void PORTA_TogglePin(porta_pin_t pin);
 uint8_t PORTA_ReadPin(porta_pin_t pin);
 
 #endif /* _PIC16_PORTA_H_ */

@@ -18,9 +18,8 @@
 #define _PIC16_PORTB_H_
 
 #include <stdint.h>
-#include <stdbool.h>
 
-typdef enum _portb_pin {
+typedef enum _portb_pin {
     PORTB_Pin_0 = 0x0U,
     PORTB_Pin_1 = 0x1U,
     PORTB_Pin_2 = 0x2U,
@@ -62,13 +61,13 @@ typedef enum _portb_input_level {
 } portb_input_level_t;
 
 typedef struct _portb_pin_config {
-    uint8_t pinVal,
-    portb_direction_t direction,
-    portb_analog_sel_t analogSel,
-    portb_pull_up_t pullUp,
-    portb_open_drain_t openDrain,
-    portb_slaw_rate_t slawRate,
-    portb_input_level_t inputLevel,
+    uint8_t pinVal;
+    portb_direction_t direction;
+    portb_analog_sel_t analogSel;
+    portb_pull_up_t pullUp;
+    portb_open_drain_t openDrain;
+    portb_slaw_rate_t slawRate;
+    portb_input_level_t inputLevel;
 } portb_pin_config_t;
 
 void PORTB_Deinit(void);
@@ -76,9 +75,9 @@ void PORTB_Init(portb_pin_t pin, const portb_pin_config_t *config);
 void PORTB_Write(uint8_t portVal);
 uint8_t PORTB_Read(void);
 void PORTB_WritePin(portb_pin_t pin, uint8_t pinVal);
-void PORTB_SetPin(portb_pin_t pin, uint8_t pinVal);
-void PORTB_ClearPin(portb_pin_t pin, uint8_t pinVal);
-void PORTB_TogglePin(portb_pin_t pin, uint8_t pinVal);
+void PORTB_SetPin(portb_pin_t pin);
+void PORTB_ClearPin(portb_pin_t pin);
+void PORTB_TogglePin(portb_pin_t pin);
 uint8_t PORTB_ReadPin(portb_pin_t pin);
 
 #endif /* _PIC16_PORTB_H_ */

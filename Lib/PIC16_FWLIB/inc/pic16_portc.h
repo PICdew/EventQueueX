@@ -18,9 +18,8 @@
 #define _PIC16_PORTC_H_
 
 #include <stdint.h>
-#include <stdbool.h>
 
-typdef enum _portc_pin {
+typedef enum _portc_pin {
     PORTC_Pin_0 = 0x0U,
     PORTC_Pin_1 = 0x1U,
     PORTC_Pin_2 = 0x2U,
@@ -67,14 +66,14 @@ typedef enum _portc_high_drive {
 } portc_high_drive_t;
 
 typedef struct _portc_pin_config {
-    uint8_t pinVal,
-    portc_direction_t direction,
-    portc_analog_sel_t analogSel,
-    portc_pull_up_t pullUp,
-    portc_open_drain_t openDrain,
-    portc_slaw_rate_t slawRate,
-    portc_input_level_t inputLevel,
-    portc_high_drive_t highDrive,
+    uint8_t pinVal;
+    portc_direction_t direction;
+    portc_analog_sel_t analogSel;
+    portc_pull_up_t pullUp;
+    portc_open_drain_t openDrain;
+    portc_slaw_rate_t slawRate;
+    portc_input_level_t inputLevel;
+    portc_high_drive_t highDrive;
 } portc_pin_config_t;
 
 void PORTC_Deinit(void);
@@ -82,9 +81,9 @@ void PORTC_Init(portc_pin_t pin, const portc_pin_config_t *config);
 void PORTC_Write(uint8_t portVal);
 uint8_t PORTC_Read(void);
 void PORTC_WritePin(portc_pin_t pin, uint8_t pinVal);
-void PORTC_SetPin(portc_pin_t pin, uint8_t pinVal);
-void PORTC_ClearPin(portc_pin_t pin, uint8_t pinVal);
-void PORTC_TogglePin(portc_pin_t pin, uint8_t pinVal);
+void PORTC_SetPin(portc_pin_t pin);
+void PORTC_ClearPin(portc_pin_t pin);
+void PORTC_TogglePin(portc_pin_t pin);
 uint8_t PORTC_ReadPin(portc_pin_t pin);
 
 #endif /* _PIC16_PORTC_H_ */

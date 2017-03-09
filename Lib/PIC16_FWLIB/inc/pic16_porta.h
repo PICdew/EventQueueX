@@ -60,7 +60,8 @@ typedef enum _porta_input_level {
     PORTA_Input_Level_St = 0x1U,
 } porta_input_level_t;
 
-typedef struct _porta_pin_config {
+typedef struct _porta_pin_config
+{
     uint8_t pinVal;
     porta_direction_t direction;
     porta_analog_sel_t analogSel;

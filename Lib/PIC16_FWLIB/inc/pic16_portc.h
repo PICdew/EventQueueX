@@ -65,7 +65,8 @@ typedef enum _portc_high_drive {
     PORTC_High_Drive_Enable = 0x1U,
 } portc_high_drive_t;
 
-typedef struct _portc_pin_config {
+typedef struct _portc_pin_config
+{
     uint8_t pinVal;
     portc_direction_t direction;
     portc_analog_sel_t analogSel;

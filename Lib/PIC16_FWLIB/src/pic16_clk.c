@@ -192,7 +192,7 @@ void CLK_setExtOscFreq(uint32_t frequency)
     externalOscFreq = frequency;
 }
 
-uint8_t CLK_GetStatus(void)
+uint8_t CLK_GetStatusFlag(void)
 {
     return OSCSTAT;
 }

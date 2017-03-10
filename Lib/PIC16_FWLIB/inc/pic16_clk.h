@@ -67,7 +67,7 @@ void CLK_SetIntOscFreq(clk_int_osc_freq_t frequency);
 void CLK_setExtOscFreq(uint32_t frequency);
 void CLK_EnablePll(void);
 void CLK_DisablePll(void);
-uint8_t CLK_GetStatus(void);
+uint8_t CLK_GetStatusFlag(void);
 uint32_t CLK_GetFreq(clk_name_t name);
 void CLK_SetIntOscTurningVal(uint8_t turning);
 

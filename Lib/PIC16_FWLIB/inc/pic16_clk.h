@@ -43,23 +43,23 @@ typedef enum _clk_int_osc_freq {
 } clk_int_osc_freq_t;
 
 typedef enum _clk_status {
-    CLK_STATUS_HfIntOscStable = 0x1U,
-    CLK_STATUS_LfIntOscReady = 0x2U,
-    CLK_STATUS_MfIntOscReady = 0x4U,
-    CLK_STATUS_HfIntOscLocked = 0x8U,
-    CLK_STATUS_HfIntOscReady = 0x10U,
-    CLK_STATUS_MainOscReady = 0x20U,
-    CLK_STATUS_PllReady = 0x40U,
+    CLK_Status_HfIntOscStable = 0x1U,
+    CLK_Status_LfIntOscReady = 0x2U,
+    CLK_Status_MfIntOscReady = 0x4U,
+    CLK_Status_HfIntOscLocked = 0x8U,
+    CLK_Status_HfIntOscReady = 0x10U,
+    CLK_Status_MainOscReady = 0x20U,
+    CLK_Status_PllReady = 0x40U,
 } clk_status_t;
 
 typedef enum _clk_name {
-    CLK_NAME_SystemClk,
-    CLK_NAME_PrimaryOscClk,
-    CLK_NAME_HfIntOscClk,
-    CLK_NAME_MfIntOscClk,
-    CLK_NAME_LfIntOscClk,
-    CLK_NAME_FrcClk,
-    CLK_NAME_ExtOscClk,
+    CLK_Name_SystemClk,
+    CLK_Name_PrimaryOscClk,
+    CLK_Name_HfIntOscClk,
+    CLK_Name_MfIntOscClk,
+    CLK_Name_LfIntOscClk,
+    CLK_Name_FrcClk,
+    CLK_Name_ExtOscClk,
 } clk_name_t;
 
 void CLK_SetSysClkSrc(clk_sys_clk_src_t source);

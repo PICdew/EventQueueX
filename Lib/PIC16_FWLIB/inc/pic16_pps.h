@@ -19,8 +19,19 @@
 
 #include <stdint.h>
 
+/*******************************************************************************
+ * API
+ ******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void PPS_Lock(void);
 void PPS_Unlock(void);
 void PPS_SetPinMux(uint8_t outputReg, uint8_t outputVal, uint8_t inputReg, uint8_t inputVal);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif /* _PIC16_PPS_H_ */

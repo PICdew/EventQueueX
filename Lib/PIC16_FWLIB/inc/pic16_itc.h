@@ -19,6 +19,9 @@
 
 #include <stdbool.h>
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
 typedef enum _IRQn_Type {
     IOC_IRQn           = 0U,
     INT_IRQn           = 1U,
@@ -65,6 +68,13 @@ typedef enum _IRQn_Type {
     TMR3_GATE_IRQn     = 42U,
 } IRQn_Type;
 
+/*******************************************************************************
+ * API
+ ******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void ITC_EnableGlobalIrq(void);
 void ITC_DisableGlobalIrq(void);
 void ITC_EnablePeripheralIrq(void);
@@ -74,5 +84,9 @@ void ITC_DisableIrq(IRQn_Type irqNum);
 bool ITC_GetPendingIrq(IRQn_Type irqNum);
 void ITC_SetPendingIrq(IRQn_Type irqNum);
 void ITC_ClearPendingIrq(IRQn_Type irqNum);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif /* _PIC16_ITC_H_ */

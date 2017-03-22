@@ -19,6 +19,9 @@
 
 #include <stdint.h>
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
 typedef enum _clk_sys_clk_src {
     CLK_SysClkSrc_MainOsc = 0x0U,
     CLK_SysClkSrc_IntOsc = 0x10U,
@@ -62,6 +65,13 @@ typedef enum _clk_name {
     CLK_Name_ExtOscClk,
 } clk_name_t;
 
+/*******************************************************************************
+ * API
+ ******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void CLK_SetSysClkSrc(clk_sys_clk_src_t source);
 void CLK_SetIntOscFreq(clk_int_osc_freq_t frequency);
 void CLK_setExtOscFreq(uint32_t frequency);
@@ -70,5 +80,9 @@ void CLK_DisablePll(void);
 uint8_t CLK_GetStatusFlag(void);
 uint32_t CLK_GetFreq(clk_name_t name);
 void CLK_SetIntOscTurningVal(uint8_t turning);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif /* _PIC16_CLK_H_ */

@@ -20,6 +20,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
 typedef enum _eusart_status {
     EUSART_Status_TxShiftRegEmpty = 0x1U,
     EUSART_Status_RxOverrunErr = 0x2U,
@@ -40,6 +43,13 @@ typedef struct _eusart_config
     bool invertTx;
 } eusart_config_t;
 
+/*******************************************************************************
+ * API
+ ******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void EUSART_Init(const eusart_config_t *config, uint32_t sourceClk_Hz);
 void EUSART_Deinit(void);
 void EUSART_EnableTx(bool enable);
@@ -50,5 +60,9 @@ void EUSART_SendData(uint8_t data);
 uint8_t EUSART_ReceiveData(void);
 void EUSART_SendData9(uint16_t data);
 uint16_t EUSART_ReceiveData9(void);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif /* _PIC16_EUSART_H_ */

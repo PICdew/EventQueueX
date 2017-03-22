@@ -19,6 +19,9 @@
 
 #include <stdint.h>
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
 typedef enum _portb_pin {
     PORTB_Pin_0 = 0x0U,
     PORTB_Pin_1 = 0x1U,
@@ -71,6 +74,13 @@ typedef struct _portb_pin_config
     portb_input_level_t inputLevel;
 } portb_pin_config_t;
 
+/*******************************************************************************
+ * API
+ ******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void PORTB_Deinit(void);
 void PORTB_Init(portb_pin_t pin, const portb_pin_config_t *config);
 void PORTB_Write(uint8_t portVal);
@@ -80,5 +90,9 @@ void PORTB_SetPin(portb_pin_t pin);
 void PORTB_ClearPin(portb_pin_t pin);
 void PORTB_TogglePin(portb_pin_t pin);
 uint8_t PORTB_ReadPin(portb_pin_t pin);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif /* _PIC16_PORTB_H_ */

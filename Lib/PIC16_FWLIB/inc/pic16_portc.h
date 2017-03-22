@@ -19,6 +19,9 @@
 
 #include <stdint.h>
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
 typedef enum _portc_pin {
     PORTC_Pin_0 = 0x0U,
     PORTC_Pin_1 = 0x1U,
@@ -77,6 +80,13 @@ typedef struct _portc_pin_config
     portc_high_drive_t highDrive;
 } portc_pin_config_t;
 
+/*******************************************************************************
+ * API
+ ******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void PORTC_Deinit(void);
 void PORTC_Init(portc_pin_t pin, const portc_pin_config_t *config);
 void PORTC_Write(uint8_t portVal);
@@ -86,5 +96,9 @@ void PORTC_SetPin(portc_pin_t pin);
 void PORTC_ClearPin(portc_pin_t pin);
 void PORTC_TogglePin(portc_pin_t pin);
 uint8_t PORTC_ReadPin(portc_pin_t pin);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif /* _PIC16_PORTC_H_ */

@@ -19,6 +19,9 @@
 
 #include <stdint.h>
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
 typedef enum _porta_pin {
     PORTA_Pin_0 = 0x0U,
     PORTA_Pin_1 = 0x1U,
@@ -71,6 +74,13 @@ typedef struct _porta_pin_config
     porta_input_level_t inputLevel;
 } porta_pin_config_t;
 
+/*******************************************************************************
+ * API
+ ******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void PORTA_Deinit(void);
 void PORTA_Init(porta_pin_t pin, const porta_pin_config_t *config);
 void PORTA_Write(uint8_t portVal);
@@ -80,5 +90,9 @@ void PORTA_SetPin(porta_pin_t pin);
 void PORTA_ClearPin(porta_pin_t pin);
 void PORTA_TogglePin(porta_pin_t pin);
 uint8_t PORTA_ReadPin(porta_pin_t pin);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif /* _PIC16_PORTA_H_ */

@@ -55,7 +55,6 @@ void EUSART_Deinit(void);
 void EUSART_EnableTx(bool enable);
 void EUSART_EnableRx(bool enable);
 uint8_t EUSART_GetStatusFlag(void);
-void EUSART_ClearStatusFlag(uint8_t flag);
 void EUSART_SendData(uint8_t data);
 uint8_t EUSART_ReceiveData(void);
 void EUSART_SendData9(uint16_t data);

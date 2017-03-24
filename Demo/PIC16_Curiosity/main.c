@@ -46,7 +46,11 @@ void blinking2(event_t event)
     if (0U != event.signal)
     {
         IO_RA5_Toggle();
-        printf("Hello\r\n");
+
+        if (ADC_IsConversionDone())
+        {
+            printf("ADC Result:%d\r\n", ADC_GetConversionResult());
+        }
     }
 }
 
@@ -73,6 +77,11 @@ void EQX_GoToSleep(void)
 void main(void)
 {
     SYSTEM_Initialize();
+
+    ADC_Initialize();
+    ADC_SelectChannel(channel_AN4);
+    ADC_StartConversion();
+    EUSART_Initialize();
 
     EQX_Init();
     EQX_CreateTask(blinking1, 0U, blink1EvtQueue,

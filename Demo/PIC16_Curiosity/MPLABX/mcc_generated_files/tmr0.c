@@ -65,7 +65,7 @@ void TMR0_Initialize(void)
     // Set TMR0 to the options selected in the User Interface
 
     // PSA assigned; PS 1:32; TMRSE Increment_hi_lo; mask the nWPUEN and INTEDG bits
-    OPTION_REG = (OPTION_REG & 0xC0) | 0xD4 & 0x3F; 
+    OPTION_REG = (OPTION_REG & 0xC0) | 0xD4 & 0x3F;
 
     // TMR0 0; 
     TMR0 = 0x00;
@@ -82,7 +82,6 @@ void TMR0_Initialize(void)
     // Set Default Interrupt Handler
     TMR0_SetInterruptHandler(TMR0_DefaultInterruptHandler);
 }
-
 
 uint8_t TMR0_ReadTimer(void)
 {
@@ -137,11 +136,13 @@ void TMR0_CallBack(void)
     }
 }
 
-void TMR0_SetInterruptHandler(void* InterruptHandler){
+void TMR0_SetInterruptHandler(void* InterruptHandler)
+{
     TMR0_InterruptHandler = InterruptHandler;
 }
 
-void TMR0_DefaultInterruptHandler(void){
+void TMR0_DefaultInterruptHandler(void)
+{
     // add your TMR0 interrupt custom code
     // or set custom function using TMR0_SetInterruptHandler()
 }

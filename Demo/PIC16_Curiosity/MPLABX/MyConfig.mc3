@@ -3575,7 +3575,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="EUSART" name="useStdio"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="System Module" registerAlias="CONFIG3" settingAlias="WDTCPS" alias="WDTCPSF"/>
@@ -3865,7 +3865,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\eusart.h</file>
-         <hash>765f3a73f84026da9d32a03771f724253b37f4367723837001144bbdc3d745f0</hash>
+         <hash>46a52f89802ca96b7be953a4a9ba8b239f0ba409b49e704374feb453ef726fba</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr0.h</file>
@@ -3885,7 +3885,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\eusart.c</file>
-         <hash>5e9401a06d58ef0fc12c8b862922223af7b7e1960358e52e56b1b018e2186d17</hash>
+         <hash>67711877409ed0fee189dbdc702a13cc7011d67eebe8914bd1354460c9244f72</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr0.c</file>

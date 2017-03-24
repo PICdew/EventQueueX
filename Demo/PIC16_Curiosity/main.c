@@ -19,6 +19,7 @@
  ******************************************************************************/
 #include <xc.h>
 #include <stdint.h>
+#include <stdio.h>
 #include "mcc_generated_files/mcc.h"
 #include "eqx.h"
 
@@ -45,13 +46,7 @@ void blinking2(event_t event)
     if (0U != event.signal)
     {
         IO_RA5_Toggle();
-        EUSART_Write('H');
-        EUSART_Write('e');
-        EUSART_Write('l');
-        EUSART_Write('l');
-        EUSART_Write('o');
-        EUSART_Write('\n');
-        EUSART_Write('\r');
+        printf("Hello\r\n");
     }
 }
 

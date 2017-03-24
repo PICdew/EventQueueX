@@ -95,7 +95,6 @@ void EUSART_Initialize(void)
     // Baud Rate = 9600; SP1BRGH 3; 
     SPBRGH = 0x03;
 
-
     // initializing the driver state
     eusartTxHead = 0;
     eusartTxTail = 0;
@@ -112,7 +111,7 @@ void EUSART_Initialize(void)
 uint8_t EUSART_Read(void)
 {
     uint8_t readValue  = 0;
-    
+
     while(0 == eusartRxCount)
     {
     }
@@ -152,9 +151,18 @@ void EUSART_Write(uint8_t txData)
     PIE1bits.TXIE = 1;
 }
 
+char getch(void)
+{
+    return EUSART_Read();
+}
+
+void putch(char txData)
+{
+    EUSART_Write(txData);
+}
+
 void EUSART_Transmit_ISR(void)
 {
-
     // add your EUSART interrupt custom code
     if(sizeof(eusartTxBuffer) > eusartTxBufferRemaining)
     {
@@ -173,7 +181,6 @@ void EUSART_Transmit_ISR(void)
 
 void EUSART_Receive_ISR(void)
 {
-
     if(1 == RC1STAbits.OERR)
     {
         // EUSART error - restart

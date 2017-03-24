@@ -75,7 +75,6 @@
 
 void SYSTEM_Initialize(void)
 {
-
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
     TMR0_Initialize();
@@ -84,18 +83,17 @@ void SYSTEM_Initialize(void)
 
 void OSCILLATOR_Initialize(void)
 {
-    // SCS FOSC; SPLLEN disabled; IRCF 8MHz_HF; 
+    // SCS FOSC; SPLLEN disabled; IRCF 8MHz_HF;
     OSCCON = 0x70;
-    // TUN 0; 
+    // TUN 0;
     OSCTUNE = 0x00;
     // Set the secondary oscillator
-    
+
     // Wait for PLL to stabilize
     while(PLLR == 0)
     {
+    }
 }
-}
-
 
 /**
  End of File

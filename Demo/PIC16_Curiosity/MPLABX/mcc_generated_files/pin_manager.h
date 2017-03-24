@@ -116,6 +116,18 @@
 #define IO_RA5_SetPushPull()    do { ODCONAbits.ODA5 = 1; } while(0)
 #define IO_RA5_SetOpenDrain()   do { ODCONAbits.ODA5 = 0; } while(0)
 
+// get/set RB5 procedures
+#define RB5_SetHigh()    do { LATBbits.LATB5 = 1; } while(0)
+#define RB5_SetLow()   do { LATBbits.LATB5 = 0; } while(0)
+#define RB5_Toggle()   do { LATBbits.LATB5 = ~LATBbits.LATB5; } while(0)
+#define RB5_GetValue()         PORTBbits.RB5
+#define RB5_SetDigitalInput()   do { TRISBbits.TRISB5 = 1; } while(0)
+#define RB5_SetDigitalOutput()  do { TRISBbits.TRISB5 = 0; } while(0)
+#define RB5_SetPullup()     do { WPUBbits.WPUB5 = 1; } while(0)
+#define RB5_ResetPullup()   do { WPUBbits.WPUB5 = 0; } while(0)
+#define RB5_SetAnalogMode() do { ANSELBbits.ANSB5 = 1; } while(0)
+#define RB5_SetDigitalMode()do { ANSELBbits.ANSB5 = 0; } while(0)
+
 // get/set RB7 procedures
 #define RB7_SetHigh()    do { LATBbits.LATB7 = 1; } while(0)
 #define RB7_SetLow()   do { LATBbits.LATB7 = 0; } while(0)

@@ -32,6 +32,11 @@ static event_t blink2EvtQueue[10];
 /*******************************************************************************
  * Code
  ******************************************************************************/
+void TMR0_IrqHandler(void)
+{
+    EQX_PostEvent(0, 1U, 0);
+}
+
 void blinking1(event_t event)
 {
     if (0U != event.signal)
@@ -46,17 +51,11 @@ void blinking2(event_t event)
     if (0U != event.signal)
     {
         IO_RA5_Toggle();
-
         if (ADC_IsConversionDone())
         {
             printf("ADC Result:%d\r\n", ADC_GetConversionResult());
         }
     }
-}
-
-void TMR0_IrqHandler(void)
-{
-    EQX_PostEvent(0, 1U, 0);
 }
 
 void EQX_Start(void)

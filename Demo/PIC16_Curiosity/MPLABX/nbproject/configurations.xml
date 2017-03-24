@@ -15,12 +15,10 @@
         <itemPath>mcc_generated_files/mcc.h</itemPath>
         <itemPath>mcc_generated_files/tmr0.h</itemPath>
         <itemPath>mcc_generated_files/pin_manager.h</itemPath>
+        <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
+        <itemPath>mcc_generated_files/eusart.h</itemPath>
       </logicalFolder>
       <itemPath>../eqx_config.h</itemPath>
-      <itemPath>../../../lib/PIC16_FWLIB/inc/pic16_itc.h</itemPath>
-      <itemPath>../../../Lib/PIC16_FWLIB/inc/pic16_porta.h</itemPath>
-      <itemPath>../../../Lib/PIC16_FWLIB/inc/pic16_portb.h</itemPath>
-      <itemPath>../../../Lib/PIC16_FWLIB/inc/pic16_portc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -40,12 +38,9 @@
         <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
         <itemPath>mcc_generated_files/tmr0.c</itemPath>
         <itemPath>mcc_generated_files/pin_manager.c</itemPath>
+        <itemPath>mcc_generated_files/eusart.c</itemPath>
       </logicalFolder>
       <itemPath>../main.c</itemPath>
-      <itemPath>../../../lib/PIC16_FWLIB/src/pic16_itc.c</itemPath>
-      <itemPath>../../../Lib/PIC16_FWLIB/src/pic16_porta.c</itemPath>
-      <itemPath>../../../Lib/PIC16_FWLIB/src/pic16_portb.c</itemPath>
-      <itemPath>../../../Lib/PIC16_FWLIB/src/pic16_portc.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

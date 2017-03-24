@@ -21,9 +21,6 @@
 #include <stdint.h>
 #include "mcc_generated_files/mcc.h"
 #include "eqx.h"
-#include "pic16_itc.h"
-#include "pic16_porta.h"
-#include "pic16_portc.h"
 
 /*******************************************************************************
  * Variables
@@ -38,7 +35,7 @@ void blinking1(event_t event)
 {
     if (0U != event.signal)
     {
-        PORTA_TogglePin(PORTA_Pin_2);
+        IO_RA2_Toggle();
         EQX_PostEvent(1U, 1U, 0);
     }
 }
@@ -47,7 +44,14 @@ void blinking2(event_t event)
 {
     if (0U != event.signal)
     {
-        PORTA_TogglePin(PORTA_Pin_5);
+        IO_RA5_Toggle();
+        EUSART_Write('H');
+        EUSART_Write('e');
+        EUSART_Write('l');
+        EUSART_Write('l');
+        EUSART_Write('o');
+        EUSART_Write('\n');
+        EUSART_Write('\r');
     }
 }
 
@@ -59,14 +63,12 @@ void TMR0_IrqHandler(void)
 void EQX_Start(void)
 {
     TMR0_Initialize();
-    ITC_ClearPendingIrq(TMR0_IRQn);
-    ITC_EnableIrq(TMR0_IRQn);
     TMR0_SetInterruptHandler(TMR0_IrqHandler);
 
     // Enable the Peripheral Interrupts
-    ITC_EnablePeripheralIrq();
+    INTERRUPT_PeripheralInterruptEnable();
     // Enable the Global Interrupts
-    ITC_EnableGlobalIrq();
+    INTERRUPT_GlobalInterruptEnable();
 }
 
 void EQX_GoToSleep(void)
@@ -75,38 +77,12 @@ void EQX_GoToSleep(void)
 
 void main(void)
 {
-    const porta_pin_config_t portaPinConfig = {
-        0U,
-        PORTA_Direction_Output,
-        PORTA_Analog_Sel_DigitalInOut,
-        PORTA_Pull_Up_Disable,
-        PORTA_Open_Drain_Disable,
-        PORTA_Slaw_Rate_Limited,
-        PORTA_Input_Level_Ttl,
-    };
-    const portc_pin_config_t portcPinConfig = {
-        0U,
-        PORTC_Direction_Output,
-        PORTC_Analog_Sel_DigitalInOut,
-        PORTC_Pull_Up_Disable,
-        PORTC_Open_Drain_Disable,
-        PORTC_Slaw_Rate_Limited,
-        PORTC_Input_Level_Ttl,
-        PORTC_High_Drive_Disable,
-    };
-
     SYSTEM_Initialize();
-
-    PORTA_Init(PORTA_Pin_1, &portaPinConfig);
-    PORTA_Init(PORTA_Pin_2, &portaPinConfig);
-    PORTA_Init(PORTA_Pin_5, &portaPinConfig);
-    PORTC_Init(PORTC_Pin_5, &portcPinConfig);
 
     EQX_Init();
     EQX_CreateTask(blinking1, 0U, blink1EvtQueue,
                    sizeof(blink1EvtQueue)/sizeof(blink1EvtQueue[0]),
                    0U, 0U);
-
     EQX_CreateTask(blinking2, 1U, blink2EvtQueue,
                    sizeof(blink2EvtQueue)/sizeof(blink2EvtQueue[0]),
                    0U, 0U);

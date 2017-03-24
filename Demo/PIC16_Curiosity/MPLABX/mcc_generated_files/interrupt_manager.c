@@ -51,7 +51,15 @@
 void interrupt INTERRUPT_InterruptManager (void)
 {
     // interrupt handler
-    if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
+    if(INTCONbits.PEIE == 1 && PIE1bits.RCIE == 1 && PIR1bits.RCIF == 1)
+    {
+        EUSART_Receive_ISR();
+    }
+    else if(INTCONbits.PEIE == 1 && PIE1bits.TXIE == 1 && PIR1bits.TXIF == 1)
+    {
+        EUSART_Transmit_ISR();
+    }
+    else if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
     {
         TMR0_ISR();
     }

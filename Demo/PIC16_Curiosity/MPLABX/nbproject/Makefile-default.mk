@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../../Source/eqx.c ../../../Source/event_queue.c mcc_generated_files/mcc.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr0.c mcc_generated_files/pin_manager.c ../main.c ../../../lib/PIC16_FWLIB/src/pic16_itc.c ../../../Lib/PIC16_FWLIB/src/pic16_porta.c ../../../Lib/PIC16_FWLIB/src/pic16_portb.c ../../../Lib/PIC16_FWLIB/src/pic16_portc.c
+SOURCEFILES_QUOTED_IF_SPACED=../../../Source/eqx.c ../../../Source/event_queue.c mcc_generated_files/mcc.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr0.c mcc_generated_files/pin_manager.c mcc_generated_files/eusart.c ../main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/449926602/eqx.p1 ${OBJECTDIR}/_ext/449926602/event_queue.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/_ext/1472/main.p1 ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1 ${OBJECTDIR}/_ext/16410304/pic16_porta.p1 ${OBJECTDIR}/_ext/16410304/pic16_portb.p1 ${OBJECTDIR}/_ext/16410304/pic16_portc.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/449926602/eqx.p1.d ${OBJECTDIR}/_ext/449926602/event_queue.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/_ext/1472/main.p1.d ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1.d ${OBJECTDIR}/_ext/16410304/pic16_porta.p1.d ${OBJECTDIR}/_ext/16410304/pic16_portb.p1.d ${OBJECTDIR}/_ext/16410304/pic16_portc.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/449926602/eqx.p1 ${OBJECTDIR}/_ext/449926602/event_queue.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/eusart.p1 ${OBJECTDIR}/_ext/1472/main.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/449926602/eqx.p1.d ${OBJECTDIR}/_ext/449926602/event_queue.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/eusart.p1.d ${OBJECTDIR}/_ext/1472/main.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/449926602/eqx.p1 ${OBJECTDIR}/_ext/449926602/event_queue.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/_ext/1472/main.p1 ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1 ${OBJECTDIR}/_ext/16410304/pic16_porta.p1 ${OBJECTDIR}/_ext/16410304/pic16_portb.p1 ${OBJECTDIR}/_ext/16410304/pic16_portc.p1
+OBJECTFILES=${OBJECTDIR}/_ext/449926602/eqx.p1 ${OBJECTDIR}/_ext/449926602/event_queue.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/eusart.p1 ${OBJECTDIR}/_ext/1472/main.p1
 
 # Source Files
-SOURCEFILES=../../../Source/eqx.c ../../../Source/event_queue.c mcc_generated_files/mcc.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr0.c mcc_generated_files/pin_manager.c ../main.c ../../../lib/PIC16_FWLIB/src/pic16_itc.c ../../../Lib/PIC16_FWLIB/src/pic16_porta.c ../../../Lib/PIC16_FWLIB/src/pic16_portb.c ../../../Lib/PIC16_FWLIB/src/pic16_portc.c
+SOURCEFILES=../../../Source/eqx.c ../../../Source/event_queue.c mcc_generated_files/mcc.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr0.c mcc_generated_files/pin_manager.c mcc_generated_files/eusart.c ../main.c
 
 
 CFLAGS=
@@ -135,6 +135,14 @@ ${OBJECTDIR}/mcc_generated_files/pin_manager.p1: mcc_generated_files/pin_manager
 	@-${MV} ${OBJECTDIR}/mcc_generated_files/pin_manager.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/mcc_generated_files/eusart.p1: mcc_generated_files/eusart.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/eusart.p1.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/eusart.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/mcc_generated_files/eusart.p1  mcc_generated_files/eusart.c 
+	@-${MV} ${OBJECTDIR}/mcc_generated_files/eusart.d ${OBJECTDIR}/mcc_generated_files/eusart.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/mcc_generated_files/eusart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 ${OBJECTDIR}/_ext/1472/main.p1: ../main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/main.p1.d 
@@ -142,38 +150,6 @@ ${OBJECTDIR}/_ext/1472/main.p1: ../main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/1472/main.p1  ../main.c 
 	@-${MV} ${OBJECTDIR}/_ext/1472/main.d ${OBJECTDIR}/_ext/1472/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/1472/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/_ext/1269706400/pic16_itc.p1: ../../../lib/PIC16_FWLIB/src/pic16_itc.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1269706400" 
-	@${RM} ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1.d 
-	@${RM} ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/1269706400/pic16_itc.p1  ../../../lib/PIC16_FWLIB/src/pic16_itc.c 
-	@-${MV} ${OBJECTDIR}/_ext/1269706400/pic16_itc.d ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/_ext/16410304/pic16_porta.p1: ../../../Lib/PIC16_FWLIB/src/pic16_porta.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/16410304" 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_porta.p1.d 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_porta.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/16410304/pic16_porta.p1  ../../../Lib/PIC16_FWLIB/src/pic16_porta.c 
-	@-${MV} ${OBJECTDIR}/_ext/16410304/pic16_porta.d ${OBJECTDIR}/_ext/16410304/pic16_porta.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/_ext/16410304/pic16_porta.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/_ext/16410304/pic16_portb.p1: ../../../Lib/PIC16_FWLIB/src/pic16_portb.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/16410304" 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_portb.p1.d 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_portb.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/16410304/pic16_portb.p1  ../../../Lib/PIC16_FWLIB/src/pic16_portb.c 
-	@-${MV} ${OBJECTDIR}/_ext/16410304/pic16_portb.d ${OBJECTDIR}/_ext/16410304/pic16_portb.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/_ext/16410304/pic16_portb.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/_ext/16410304/pic16_portc.p1: ../../../Lib/PIC16_FWLIB/src/pic16_portc.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/16410304" 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_portc.p1.d 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_portc.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/16410304/pic16_portc.p1  ../../../Lib/PIC16_FWLIB/src/pic16_portc.c 
-	@-${MV} ${OBJECTDIR}/_ext/16410304/pic16_portc.d ${OBJECTDIR}/_ext/16410304/pic16_portc.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/_ext/16410304/pic16_portc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
 ${OBJECTDIR}/_ext/449926602/eqx.p1: ../../../Source/eqx.c  nbproject/Makefile-${CND_CONF}.mk
@@ -224,6 +200,14 @@ ${OBJECTDIR}/mcc_generated_files/pin_manager.p1: mcc_generated_files/pin_manager
 	@-${MV} ${OBJECTDIR}/mcc_generated_files/pin_manager.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/mcc_generated_files/eusart.p1: mcc_generated_files/eusart.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/eusart.p1.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/eusart.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/mcc_generated_files/eusart.p1  mcc_generated_files/eusart.c 
+	@-${MV} ${OBJECTDIR}/mcc_generated_files/eusart.d ${OBJECTDIR}/mcc_generated_files/eusart.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/mcc_generated_files/eusart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 ${OBJECTDIR}/_ext/1472/main.p1: ../main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
 	@${RM} ${OBJECTDIR}/_ext/1472/main.p1.d 
@@ -231,38 +215,6 @@ ${OBJECTDIR}/_ext/1472/main.p1: ../main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/1472/main.p1  ../main.c 
 	@-${MV} ${OBJECTDIR}/_ext/1472/main.d ${OBJECTDIR}/_ext/1472/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/1472/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/_ext/1269706400/pic16_itc.p1: ../../../lib/PIC16_FWLIB/src/pic16_itc.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1269706400" 
-	@${RM} ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1.d 
-	@${RM} ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/1269706400/pic16_itc.p1  ../../../lib/PIC16_FWLIB/src/pic16_itc.c 
-	@-${MV} ${OBJECTDIR}/_ext/1269706400/pic16_itc.d ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/_ext/1269706400/pic16_itc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/_ext/16410304/pic16_porta.p1: ../../../Lib/PIC16_FWLIB/src/pic16_porta.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/16410304" 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_porta.p1.d 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_porta.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/16410304/pic16_porta.p1  ../../../Lib/PIC16_FWLIB/src/pic16_porta.c 
-	@-${MV} ${OBJECTDIR}/_ext/16410304/pic16_porta.d ${OBJECTDIR}/_ext/16410304/pic16_porta.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/_ext/16410304/pic16_porta.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/_ext/16410304/pic16_portb.p1: ../../../Lib/PIC16_FWLIB/src/pic16_portb.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/16410304" 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_portb.p1.d 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_portb.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/16410304/pic16_portb.p1  ../../../Lib/PIC16_FWLIB/src/pic16_portb.c 
-	@-${MV} ${OBJECTDIR}/_ext/16410304/pic16_portb.d ${OBJECTDIR}/_ext/16410304/pic16_portb.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/_ext/16410304/pic16_portb.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/_ext/16410304/pic16_portc.p1: ../../../Lib/PIC16_FWLIB/src/pic16_portc.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/16410304" 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_portc.p1.d 
-	@${RM} ${OBJECTDIR}/_ext/16410304/pic16_portc.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"../../../Include" -I"../../../Ports/PIC16/MPLABX" -I"../" -I"." -I"mcc_generated_files" -I"../../../lib/PIC16_FWLIB/inc" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/_ext/16410304/pic16_portc.p1  ../../../Lib/PIC16_FWLIB/src/pic16_portc.c 
-	@-${MV} ${OBJECTDIR}/_ext/16410304/pic16_portc.d ${OBJECTDIR}/_ext/16410304/pic16_portc.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/_ext/16410304/pic16_portc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

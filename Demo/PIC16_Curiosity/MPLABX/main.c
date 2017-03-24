@@ -1,21 +1,21 @@
 /**
-  @Generated MPLAB(c) Code Configurator Header File
+  Generated Main Source File
 
-  @Company:
+  Company:
     Microchip Technology Inc.
 
-  @File Name:
-    mcc.h
+  File Name:
+    main.c
 
-  @Summary:
-    This is the mcc.h file generated using MPLAB(c) Code Configurator
+  Summary:
+    This is the main file generated using MPLAB(c) Code Configurator
 
-  @Description:
+  Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  MPLAB(c) Code Configurator - 4.15
         Device            :  PIC16F1619
-        Version           :  1.02
+        Driver Version    :  2.00
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.35
         MPLAB             :  MPLAB X 3.40
@@ -43,48 +43,36 @@
     TERMS.
 */
 
-#ifndef MCC_H
-#define	MCC_H
-#include <xc.h>
-#include "pin_manager.h"
-#include <stdint.h>
-#include <stdbool.h>
-#include "interrupt_manager.h"
-#include "tmr0.h"
-#include "eusart.h"
+#include "mcc_generated_files/mcc.h"
 
-#define _XTAL_FREQ  32000000
-
-
-/**
- * @Param
-    none
- * @Returns
-    none
- * @Description
-    Initializes the device to the default states configured in the
- *                  MCC GUI
- * @Example
-    SYSTEM_Initialize(void);
+/*
+                         Main application
  */
-void SYSTEM_Initialize(void);
+void main(void)
+{
+    // initialize the device
+    SYSTEM_Initialize();
 
-/**
- * @Param
-    none
- * @Returns
-    none
- * @Description
-    Initializes the oscillator to the default states configured in the
- *                  MCC GUI
- * @Example
-    OSCILLATOR_Initialize(void);
- */
-void OSCILLATOR_Initialize(void);
+    // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
+    // Use the following macros to:
 
+    // Enable the Global Interrupts
+    //INTERRUPT_GlobalInterruptEnable();
 
+    // Enable the Peripheral Interrupts
+    //INTERRUPT_PeripheralInterruptEnable();
 
-#endif	/* MCC_H */
+    // Disable the Global Interrupts
+    //INTERRUPT_GlobalInterruptDisable();
+
+    // Disable the Peripheral Interrupts
+    //INTERRUPT_PeripheralInterruptDisable();
+
+    while (1)
+    {
+        // Add your application code
+    }
+}
 /**
  End of File
 */

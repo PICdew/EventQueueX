@@ -22,6 +22,7 @@
  ******************************************************************************/
 #include <stdint.h>
 #include <stdbool.h>
+#include "eqx_config.h"
 
 /*******************************************************************************
  * Definitions
@@ -29,7 +30,16 @@
 typedef struct _event
 {
     uint8_t signal;
+#if (EQX_PARAM_SIZE == 0U)
+#elif (EQX_PARAM_SIZE == 1U)
     uint8_t parameter;
+#elif (EQX_PARAM_SIZE == 2U)
+    uint16_t parameter;
+#elif (EQX_PARAM_SIZE == 4U)
+    uint32_t parameter;
+#else
+    #error "EQX_PARAM_SIZE defined incorrectly, expected 0, 1, 2, or 4"
+#endif
 } event_t;
 
 typedef struct _event_queue

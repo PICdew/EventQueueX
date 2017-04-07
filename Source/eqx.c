@@ -69,8 +69,19 @@ void EQX_Init(void)
     EXIT_CRITICAL_SECTION(state);
 }
 
-bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
-                    uint8_t size, uint8_t signal, uint8_t parameter)
+#if (EQX_PARAM_SIZE == 1U)
+    bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                        uint8_t size, uint8_t signal, uint8_t parameter)
+#elif (EQX_PARAM_SIZE == 2U)
+    bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                        uint8_t size, uint8_t signal, uint16_t parameter)
+#elif (EQX_PARAM_SIZE == 4U)
+    bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                        uint8_t size, uint8_t signal, uint32_t parameter)
+#else
+    bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                        uint8_t size, uint8_t signal)
+#endif
 {
     bool result = false;
     uint8_t state;
@@ -81,7 +92,12 @@ bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
         taskHandle[prio].task = task;
         taskHandle[prio].priorityMask = 1U << prio;
         EvtQueue_Init(&taskHandle[prio].evtQueueHandle, buffer, size);
+
+#if (EQX_PARAM_SIZE > 0U)
         result = EQX_PostEvent(prio, signal, parameter);
+#else
+        result = EQX_PostEvent(prio, signal);
+#endif
     }
     EXIT_CRITICAL_SECTION(state);
 
@@ -169,7 +185,15 @@ void EQX_Run(void)
     }
 }
 
-bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter)
+#if (EQX_PARAM_SIZE == 1U)
+    bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter)
+#elif (EQX_PARAM_SIZE == 2U)
+    bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint16_t parameter)
+#elif (EQX_PARAM_SIZE == 4U)
+    bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint32_t parameter)
+#else
+    bool EQX_PostEvent(uint8_t prio, uint8_t signal)
+#endif
 {
     bool result = false;
     event_t event;
@@ -183,7 +207,9 @@ bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter)
             EQX_readySet |= taskHandle[prio].priorityMask;
         }
         event.signal = signal;
+#if (EQX_PARAM_SIZE > 0U)
         event.parameter = parameter;
+#endif
         result = EvtQueue_Push(&taskHandle[prio].evtQueueHandle, &event);
     }
     EXIT_CRITICAL_SECTION(state);

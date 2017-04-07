@@ -22,6 +22,7 @@
  ******************************************************************************/
 #define EQX_MAX_TASKS       (5U)
 #define EQX_USE_GO_TO_SLEEP (1U)
+#define EQX_PARAM_SIZE      (1U)
 
 #endif /* __EQX_CONFIG_H__ */
 

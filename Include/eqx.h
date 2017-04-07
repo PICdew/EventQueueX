@@ -39,10 +39,24 @@ extern "C" {
 
 void EQX_Init(void);
 void EQX_Run(void);
-bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
-                    uint8_t size, uint8_t signal, uint8_t parameter);
+#if (EQX_PARAM_SIZE == 1U)
+    bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                        uint8_t size, uint8_t signal, uint8_t parameter);
+    bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter);
+#elif (EQX_PARAM_SIZE == 2U)
+    bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                        uint8_t size, uint8_t signal, uint16_t parameter);
+    bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint16_t parameter);
+#elif (EQX_PARAM_SIZE == 4U)
+    bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                        uint8_t size, uint8_t signal, uint32_t parameter);
+    bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint32_t parameter);
+#else
+    bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
+                        uint8_t size, uint8_t signal);
+    bool EQX_PostEvent(uint8_t prio, uint8_t signal);
+#endif
 bool EQX_DeleteTask(uint8_t prio);
-bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint8_t parameter);
 
 #ifdef __cplusplus
 }

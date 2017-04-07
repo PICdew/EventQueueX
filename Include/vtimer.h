@@ -19,6 +19,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "eqx.h"
 
 /*******************************************************************************
  * API
@@ -31,6 +32,7 @@ void VTIMER_Init(void);
 void VTIMER_SetTimer(uint8_t name, uint16_t msec, void *callback);
 void VTIMER_KillTimer(uint8_t name);
 bool VTIMER_TimerElapsed(uint8_t name);
+void VTIMER_Task(event_t event);
 void VTIMER_UpdateHandler(void);
 
 #ifdef __cplusplus

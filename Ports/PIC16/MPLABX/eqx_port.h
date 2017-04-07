@@ -28,7 +28,7 @@
                                         } while(0U)
 #define EXIT_CRITICAL_SECTION(stat)     do { \
                                             INTCONbits.GIE = stat; \
-                                        } while(0)
+                                        } while(0U)
 
 #endif /* __EQX_PORT_H__ */
 

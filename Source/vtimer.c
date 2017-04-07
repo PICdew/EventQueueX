@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-#include "eqx_config.h"
+#include "eqx.h"
 #include "vtimer.h"
 
 /*******************************************************************************
@@ -39,6 +39,10 @@ void VTIMER_KillTimer(uint8_t name)
 bool VTIMER_TimerElapsed(uint8_t name)
 {
     return true;
+}
+
+void VTIMER_Task(event_t event)
+{
 }
 
 void VTIMER_UpdateHandler(void)

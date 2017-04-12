@@ -22,40 +22,29 @@
 #include <stdio.h>
 #include "mcc_generated_files/mcc.h"
 #include "eqx.h"
+#include "vtimer.h"
 
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-static event_t blink1EvtQueue[10];
-static event_t blink2EvtQueue[10];
+static event_t vtimerEvtQueue[10U];
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
 void TMR0_IrqHandler(void)
 {
-    EQX_PostEvent(0, 1U, 0);
+    VTIMER_Update();
 }
 
-void blinking1(event_t event)
+void blinking1(void)
 {
-    if (0U != event.signal)
-    {
-        IO_RA2_Toggle();
-        EQX_PostEvent(1U, 1U, 0);
-    }
+    IO_RA2_Toggle();
 }
 
-void blinking2(event_t event)
+void blinking2(void)
 {
-    if (0U != event.signal)
-    {
-        IO_RA5_Toggle();
-        if (ADC_IsConversionDone())
-        {
-            printf("ADC Result:%d\r\n", ADC_GetConversionResult());
-        }
-    }
+    IO_RA5_Toggle();
 }
 
 void EQX_Start(void)
@@ -77,17 +66,20 @@ void main(void)
 {
     SYSTEM_Initialize();
 
-    ADC_Initialize();
-    ADC_SelectChannel(channel_AN4);
-    ADC_StartConversion();
-    EUSART_Initialize();
+//    ADC_Initialize();
+//    ADC_SelectChannel(channel_AN4);
+//    ADC_StartConversion();
+//    EUSART_Initialize();
+
+    VTIMER_Init();
+    VTIMER_SetTimer(0U, 1U, blinking1);
+    VTIMER_SetTimer(1U, 2U, blinking2);
+    VTIMER_StartTimer(0U);
+    VTIMER_StartTimer(1U);
 
     EQX_Init();
-    EQX_CreateTask(blinking1, 0U, blink1EvtQueue,
-                   sizeof(blink1EvtQueue)/sizeof(blink1EvtQueue[0]),
-                   0U, 0U);
-    EQX_CreateTask(blinking2, 1U, blink2EvtQueue,
-                   sizeof(blink2EvtQueue)/sizeof(blink2EvtQueue[0]),
+    EQX_CreateTask(VTIMER_Task, EQX_TIMER_TASK_PRIO, vtimerEvtQueue,
+                   sizeof(vtimerEvtQueue)/sizeof(vtimerEvtQueue[0]),
                    0U, 0U);
 
     /* Give flow control to scheduler. */

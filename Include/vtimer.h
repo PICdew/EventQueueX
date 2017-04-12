@@ -22,6 +22,11 @@
 #include "eqx.h"
 
 /*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+typedef void (*VTIMER_Callback)(void);
+
+/*******************************************************************************
  * API
  ******************************************************************************/
 #ifdef __cplusplus
@@ -29,11 +34,12 @@ extern "C" {
 #endif /* __cplusplus */
 
 void VTIMER_Init(void);
-void VTIMER_SetTimer(uint8_t name, uint16_t msec, void *callback);
-void VTIMER_KillTimer(uint8_t name);
-bool VTIMER_TimerElapsed(uint8_t name);
+void VTIMER_SetTimer(uint8_t name, uint16_t tick, VTIMER_Callback callback);
+void VTIMER_StartTimer(uint8_t name);
+void VTIMER_StopTimer(uint8_t name);
+uint16_t VTIMER_GetTime(uint8_t name);
 void VTIMER_Task(event_t event);
-void VTIMER_UpdateHandler(void);
+void VTIMER_Update(void);
 
 #ifdef __cplusplus
 }

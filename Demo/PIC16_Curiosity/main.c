@@ -37,12 +37,12 @@ void TMR0_IrqHandler(void)
     VTIMER_Update();
 }
 
-void blinking1(void)
+void blinking1(uint8_t name)
 {
     IO_RA2_Toggle();
 }
 
-void blinking2(void)
+void blinking2(uint8_t name)
 {
     IO_RA5_Toggle();
 }

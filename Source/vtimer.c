@@ -114,7 +114,7 @@ void VTIMER_Task(event_t event)
 {
     if (event.signal >= VTIMER_TIMEOUT_EVENT_OFFSET)
     {
-        handle[event.signal - VTIMER_TIMEOUT_EVENT_OFFSET].callback();
+        handle[event.signal - VTIMER_TIMEOUT_EVENT_OFFSET].callback(event.signal - VTIMER_TIMEOUT_EVENT_OFFSET);
     }
 }
 

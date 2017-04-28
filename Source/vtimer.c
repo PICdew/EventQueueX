@@ -17,9 +17,10 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <stdint.h>
-#include <stdbool.h>
 #include <assert.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stddef.h>
 #include "eqx.h"
 #include "vtimer.h"
 #include "eqx_config.h"
@@ -30,7 +31,6 @@
 #if (EQX_MAX_VTIMER < 1U) || (128U < EQX_MAX_VTIMER)
 #error "EQX_MAX_VTIMER not defined or out of range. Valid range is 1..256"
 #endif
-#define NULL (0U)
 #define VTIMER_TIMEOUT_EVENT_OFFSET (0x80U)
 
 typedef struct _vtimer_handle

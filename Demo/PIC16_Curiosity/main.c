@@ -37,14 +37,19 @@ void TMR0_IrqHandler(void)
     VTIMER_Update();
 }
 
-void blinking1(uint8_t name)
+void blinking(uint8_t name)
 {
-    IO_RA2_Toggle();
-}
-
-void blinking2(uint8_t name)
-{
-    IO_RA5_Toggle();
+    if (0U == name)
+    {
+        IO_RA2_Toggle();
+    }
+    else if (1U == name)
+    {
+        IO_RA5_Toggle();
+    }
+    else
+    {
+    }
 }
 
 void EQX_Start(void)
@@ -72,8 +77,8 @@ void main(void)
 //    EUSART_Initialize();
 
     VTIMER_Init();
-    VTIMER_SetTimer(0U, 1U, blinking1);
-    VTIMER_SetTimer(1U, 2U, blinking2);
+    VTIMER_SetTimer(0U, 1U, blinking);
+    VTIMER_SetTimer(1U, 2U, blinking);
     VTIMER_StartTimer(0U);
     VTIMER_StartTimer(1U);
 

@@ -44,11 +44,11 @@ typedef struct _event
 
 typedef struct _event_queue
 {
-    volatile event_t *buffer;
-    volatile event_t *head;
-    volatile event_t *tail;
-    volatile uint8_t size;
-    volatile bool full;
+    event_t *buffer;
+    event_t *head;
+    event_t *tail;
+    uint8_t size;
+    bool full;
 } event_queue_t;
 
 /*******************************************************************************

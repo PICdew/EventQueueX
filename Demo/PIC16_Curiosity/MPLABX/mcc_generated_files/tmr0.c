@@ -136,7 +136,7 @@ void TMR0_CallBack(void)
     }
 }
 
-void TMR0_SetInterruptHandler(void* InterruptHandler)
+void TMR0_SetInterruptHandler(void (*InterruptHandler)(void))
 {
     TMR0_InterruptHandler = InterruptHandler;
 }

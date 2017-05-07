@@ -13,7 +13,7 @@
   @Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.15
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.1
         Device            :  PIC16F1619
         Driver Version    :  1.02
     The generated drivers are tested against the following:
@@ -85,8 +85,6 @@ void OSCILLATOR_Initialize(void)
     OSCCON = 0x70;
     // TUN 0;
     OSCTUNE = 0x00;
-    // Set the secondary oscillator
-
     // Wait for PLL to stabilize
     while(PLLR == 0)
     {

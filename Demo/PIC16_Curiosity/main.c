@@ -71,11 +71,6 @@ void main(void)
 {
     SYSTEM_Initialize();
 
-//    ADC_Initialize();
-//    ADC_SelectChannel(channel_AN4);
-//    ADC_StartConversion();
-//    EUSART_Initialize();
-
     VTIMER_Init();
     VTIMER_SetTimer(0U, 1U, blinking);
     VTIMER_SetTimer(1U, 2U, blinking);

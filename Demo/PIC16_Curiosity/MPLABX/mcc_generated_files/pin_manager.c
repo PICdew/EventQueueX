@@ -13,7 +13,7 @@
   Description:
     This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.15
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.1
         Device            :  PIC16F1619
         Driver Version    :  1.02
     The generated drivers are tested against the following:
@@ -68,7 +68,7 @@ void PIN_MANAGER_Initialize(void)
     */
     ANSELC = 0xCF;
     ANSELB = 0xD0;
-    ANSELA = 0x17;
+    ANSELA = 0x13;
 
     /**
     WPUx registers

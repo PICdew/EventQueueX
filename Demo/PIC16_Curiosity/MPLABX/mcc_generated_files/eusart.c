@@ -13,7 +13,7 @@
   @Description
     This header file provides implementations for driver APIs for EUSART.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.15
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.1
         Device            :  PIC16F1619
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -58,14 +58,14 @@
   Section: Global Variables
 */
 
-static uint8_t eusartTxHead = 0;
-static uint8_t eusartTxTail = 0;
-static uint8_t eusartTxBuffer[EUSART_TX_BUFFER_SIZE];
+volatile uint8_t eusartTxHead = 0;
+volatile uint8_t eusartTxTail = 0;
+volatile uint8_t eusartTxBuffer[EUSART_TX_BUFFER_SIZE];
 volatile uint8_t eusartTxBufferRemaining;
 
-static uint8_t eusartRxHead = 0;
-static uint8_t eusartRxTail = 0;
-static uint8_t eusartRxBuffer[EUSART_RX_BUFFER_SIZE];
+volatile uint8_t eusartRxHead = 0;
+volatile uint8_t eusartRxTail = 0;
+volatile uint8_t eusartRxBuffer[EUSART_RX_BUFFER_SIZE];
 volatile uint8_t eusartRxCount;
 
 /**

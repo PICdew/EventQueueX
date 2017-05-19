@@ -14,8 +14,8 @@
  *  limitations under the License.
  */
 
-#ifndef _EQX_H_
-#define _EQX_H_
+#ifndef __EQX_H__
+#define __EQX_H__
 
 /*******************************************************************************
  * Includes
@@ -62,7 +62,7 @@ bool EQX_DeleteTask(uint8_t prio);
 }
 #endif /* __cplusplus */
 
-#endif /* _EQX_H_ */
+#endif /* __EQX_H__ */
 
 /******************************************************************************
  * EOF

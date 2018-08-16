@@ -107,7 +107,7 @@ bool EvtQueue_IsFull(event_queue_t *evtQueueHandle)
     uint8_t state;
 
     ENTER_CRITICAL_SECTION(state);
-    result = ((evtQueueHandle->head == evtQueueHandle->tail) && (0U != evtQueueHandle->count));
+    result = (bool)((evtQueueHandle->head == evtQueueHandle->tail) && (0U != evtQueueHandle->count));
     EXIT_CRITICAL_SECTION(state);
 
     return result;
@@ -119,7 +119,7 @@ bool EvtQueue_IsEmpty(event_queue_t *evtQueueHandle)
     uint8_t state;
 
     ENTER_CRITICAL_SECTION(state);
-    result = ((evtQueueHandle->head == evtQueueHandle->tail) && (0U == evtQueueHandle->count));
+    result = (bool)((evtQueueHandle->head == evtQueueHandle->tail) && (0U == evtQueueHandle->count));
     EXIT_CRITICAL_SECTION(state);
 
     return result;

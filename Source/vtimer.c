@@ -116,6 +116,9 @@ void VTIMER_Task(event_t event)
     {
         handle[event.signal - VTIMER_TIMEOUT_EVENT_OFFSET].callback(event.signal - VTIMER_TIMEOUT_EVENT_OFFSET);
     }
+    else
+    {
+    }
 }
 
 void VTIMER_Update(void)
@@ -139,6 +142,12 @@ void VTIMER_Update(void)
                 EQX_PostEvent(EQX_TIMER_TASK_PRIO, i + VTIMER_TIMEOUT_EVENT_OFFSET);
 #endif
             }
+            else
+            {
+            }
+        }
+        else
+        {
         }
     }
 }

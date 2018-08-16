@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Wang Ge
+ * Copyright (C) 2016 - 2018 Wang Ge
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ typedef struct _event
     uint32_t parameter;
 #else
     #error "EQX_PARAM_SIZE defined incorrectly, expected 0, 1, 2, or 4"
-#endif
+#endif /* EQX_PARAM_SIZE */
 } event_t;
 
 typedef struct _event_queue
@@ -48,7 +48,7 @@ typedef struct _event_queue
     event_t *head;
     event_t *tail;
     uint8_t size;
-    bool full;
+    uint8_t count;
 } event_queue_t;
 
 /*******************************************************************************

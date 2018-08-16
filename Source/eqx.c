@@ -28,7 +28,7 @@
  ******************************************************************************/
 #if (EQX_MAX_TASKS < 1U) || (8U < EQX_MAX_TASKS)
 #error "EQX_MAX_TASKS not defined or out of range. Valid range is 1..8"
-#endif
+#endif /* EQX_MAX_TASKS */
 
 typedef struct _task_handle
 {
@@ -43,7 +43,7 @@ typedef struct _task_handle
 extern void EQX_Start(void);
 #if defined(EQX_USE_GO_TO_SLEEP) && (1U == EQX_USE_GO_TO_SLEEP)
 extern void EQX_GoToSleep(void);
-#endif
+#endif /* EQX_USE_GO_TO_SLEEP */
 
 /*******************************************************************************
  * Variables
@@ -99,6 +99,9 @@ void EQX_Init(void)
         result = EQX_PostEvent(prio, signal);
 #endif
     }
+    else
+    {
+    }
     EXIT_CRITICAL_SECTION(state);
 
     return result;
@@ -116,6 +119,9 @@ bool EQX_DeleteTask(uint8_t prio)
         EvtQueue_Deinit(&taskHandle[prio].evtQueueHandle);
 
         result = true;
+    }
+    else
+    {
     }
     EXIT_CRITICAL_SECTION(state);
 
@@ -206,11 +212,17 @@ void EQX_Run(void)
         {
             EQX_readySet |= taskHandle[prio].priorityMask;
         }
+        else
+        {
+        }
         event.signal = signal;
 #if (EQX_PARAM_SIZE > 0U)
         event.parameter = parameter;
 #endif
         result = EvtQueue_Push(&taskHandle[prio].evtQueueHandle, &event);
+    }
+    else
+    {
     }
     EXIT_CRITICAL_SECTION(state);
 

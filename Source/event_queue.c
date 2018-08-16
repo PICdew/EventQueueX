@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Wang Ge
+ * Copyright (C) 2016 - 2018 Wang Ge
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ void EvtQueue_Init(event_queue_t *evtQueueHandle, event_t *buffer, uint8_t size)
     evtQueueHandle->head = buffer;
     evtQueueHandle->tail = buffer;
     evtQueueHandle->size = size;
-    evtQueueHandle->full = false;
+    evtQueueHandle->count = 0U;
 }
 
 void EvtQueue_Deinit(event_queue_t *evtQueueHandle)
@@ -39,7 +39,7 @@ void EvtQueue_Deinit(event_queue_t *evtQueueHandle)
     evtQueueHandle->head = NULL;
     evtQueueHandle->tail = NULL;
     evtQueueHandle->size = 0U;
-    evtQueueHandle->full = false;
+    evtQueueHandle->count = 0U;
 }
 
 bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
@@ -51,13 +51,20 @@ bool EvtQueue_Push(event_queue_t *evtQueueHandle, event_t *event)
     if (!EvtQueue_IsFull(evtQueueHandle))
     {
         *evtQueueHandle->tail = *event;
+        evtQueueHandle->count++;
         evtQueueHandle->tail++;
         if (evtQueueHandle->tail == (evtQueueHandle->buffer + evtQueueHandle->size))
         {
             evtQueueHandle->tail = evtQueueHandle->buffer;
         }
+        else
+        {
+        }
 
         result = true;
+    }
+    else
+    {
     }
     EXIT_CRITICAL_SECTION(state);
 
@@ -73,14 +80,21 @@ bool EvtQueue_Pull(event_queue_t *evtQueueHandle, event_t *event)
     if (!EvtQueue_IsEmpty(evtQueueHandle))
     {
         *event = *evtQueueHandle->head;
+        evtQueueHandle->count--;
         evtQueueHandle->head++;
 
         if (evtQueueHandle->head == (evtQueueHandle->buffer + evtQueueHandle->size))
         {
             evtQueueHandle->head = evtQueueHandle->buffer;
         }
+        else
+        {
+        }
 
         result = true;
+    }
+    else
+    {
     }
     EXIT_CRITICAL_SECTION(state);
 
@@ -93,7 +107,7 @@ bool EvtQueue_IsFull(event_queue_t *evtQueueHandle)
     uint8_t state;
 
     ENTER_CRITICAL_SECTION(state);
-    result = ((evtQueueHandle->head == evtQueueHandle->tail) && (evtQueueHandle->full));
+    result = ((evtQueueHandle->head == evtQueueHandle->tail) && (0U != evtQueueHandle->count));
     EXIT_CRITICAL_SECTION(state);
 
     return result;
@@ -105,7 +119,7 @@ bool EvtQueue_IsEmpty(event_queue_t *evtQueueHandle)
     uint8_t state;
 
     ENTER_CRITICAL_SECTION(state);
-    result = ((evtQueueHandle->head == evtQueueHandle->tail) && (!evtQueueHandle->full));
+    result = ((evtQueueHandle->head == evtQueueHandle->tail) && (0U == evtQueueHandle->count));
     EXIT_CRITICAL_SECTION(state);
 
     return result;

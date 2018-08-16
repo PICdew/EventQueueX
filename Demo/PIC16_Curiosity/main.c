@@ -1,5 +1,5 @@
 /*
- *  Copyright 2016 Wang Ge
+ *  Copyright 2018 Wang Ge
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-static volatile event_t vtimerEvtQueue[10U];
+static event_t vtimerEvtQueue[10U];
 
 /*******************************************************************************
  * Code
@@ -72,8 +72,8 @@ void main(void)
     SYSTEM_Initialize();
 
     VTIMER_Init();
-    VTIMER_SetTimer(0U, 1U, blinking);
-    VTIMER_SetTimer(1U, 2U, blinking);
+    VTIMER_SetTimer(0U, 500U, blinking);
+    VTIMER_SetTimer(1U, 1000U, blinking);
     VTIMER_StartTimer(0U);
     VTIMER_StartTimer(1U);
 

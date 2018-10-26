@@ -18,6 +18,7 @@
  * Includes
  ******************************************************************************/
 #include <stddef.h>
+
 #include "eqx_port.h"
 #include "eqx.h"
 #include "event_queue.h"
@@ -81,7 +82,7 @@ void EQX_Init(void)
 #else
     bool EQX_CreateTask(EQX_Task task, uint8_t prio, event_t *buffer,
                         uint8_t size, uint8_t signal)
-#endif
+#endif /* EQX_PARAM_SIZE */
 {
     bool result = false;
     uint8_t state;
@@ -97,7 +98,7 @@ void EQX_Init(void)
         result = EQX_PostEvent(prio, signal, parameter);
 #else
         result = EQX_PostEvent(prio, signal);
-#endif
+#endif /* EQX_PARAM_SIZE */
     }
     else
     {
@@ -185,7 +186,7 @@ void EQX_Run(void)
             EXIT_CRITICAL_SECTION(state);
 #if defined(EQX_USE_GO_TO_SLEEP) && (1U == EQX_USE_GO_TO_SLEEP)
             EQX_GoToSleep();
-#endif
+#endif /* EQX_USE_GO_TO_SLEEP */
             ENTER_CRITICAL_SECTION(state);
         }
     }
@@ -199,7 +200,7 @@ void EQX_Run(void)
     bool EQX_PostEvent(uint8_t prio, uint8_t signal, uint32_t parameter)
 #else
     bool EQX_PostEvent(uint8_t prio, uint8_t signal)
-#endif
+#endif /* EQX_PARAM_SIZE */
 {
     bool result = false;
     event_t event;
@@ -218,7 +219,7 @@ void EQX_Run(void)
         event.signal = signal;
 #if (EQX_PARAM_SIZE > 0U)
         event.parameter = parameter;
-#endif
+#endif /* EQX_PARAM_SIZE */
         result = EvtQueue_Push(&taskHandle[prio].evtQueueHandle, &event);
     }
     else

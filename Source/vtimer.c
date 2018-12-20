@@ -17,8 +17,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include <assert.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
 #include "eqx.h"
@@ -64,10 +62,10 @@ void VTIMER_Init(void)
 
 void VTIMER_SetTimer(uint8_t name, uint16_t tick, VTIMER_Callback callback)
 {
-    assert(name < EQX_MAX_VTIMER);
-    assert(!handle[name].isWorking);
-    assert(tick > 0U);
-    assert(callback != NULL);
+    EQX_ASSERT(name < EQX_MAX_VTIMER);
+    EQX_ASSERT(!handle[name].isWorking);
+    EQX_ASSERT(tick > 0U);
+    EQX_ASSERT(callback != NULL);
 
     handle[name].currentTicks = 0U;
     handle[name].desiredTicks = tick;
@@ -78,7 +76,7 @@ void VTIMER_StartTimer(uint8_t name)
 {
     uint8_t stat;
 
-    assert(name < EQX_MAX_VTIMER);
+    EQX_ASSERT(name < EQX_MAX_VTIMER);
 
     ENTER_CRITICAL_SECTION(stat);
     handle[name].isWorking = true;
@@ -89,7 +87,7 @@ void VTIMER_StopTimer(uint8_t name)
 {
     uint8_t stat;
 
-    assert(name < EQX_MAX_VTIMER);
+    EQX_ASSERT(name < EQX_MAX_VTIMER);
 
     ENTER_CRITICAL_SECTION(stat);
     handle[name].isWorking = false;
@@ -101,7 +99,7 @@ uint16_t VTIMER_GetTime(uint8_t name)
     uint8_t stat;
     uint16_t time;
 
-    assert(name < EQX_MAX_VTIMER);
+    EQX_ASSERT(name < EQX_MAX_VTIMER);
 
     ENTER_CRITICAL_SECTION(stat);
     time = handle[name].currentTicks;

@@ -19,7 +19,7 @@
  ******************************************************************************/
 #include <xc.h>
 #include <stdint.h>
-#include <stdio.h>
+//#include <stdio.h>
 #include "mcc_generated_files/mcc.h"
 #include "eqx.h"
 #include "vtimer.h"
@@ -61,6 +61,13 @@ void EQX_Start(void)
     INTERRUPT_PeripheralInterruptEnable();
     // Enable the Global Interrupts
     INTERRUPT_GlobalInterruptEnable();
+}
+
+void EQX_OnAssert(char const * const module, int32_t location)
+{
+    while (true)
+    {
+    }
 }
 
 void EQX_GoToSleep(void)

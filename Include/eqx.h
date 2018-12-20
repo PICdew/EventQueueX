@@ -28,6 +28,8 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+#define EQX_ASSERT(_test) ((_test) ? (void)0 : EQX_OnAssert(__FILE__, (int32_t)__LINE__))
+
 typedef void (*EQX_Task)(event_t event);
 
 /*******************************************************************************
@@ -57,6 +59,7 @@ void EQX_Run(void);
     bool EQX_PostEvent(uint8_t prio, uint8_t signal);
 #endif
 bool EQX_DeleteTask(uint8_t prio);
+void EQX_OnAssert(char const * const module, int32_t location);
 
 #ifdef __cplusplus
 }
